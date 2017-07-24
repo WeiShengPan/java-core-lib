@@ -23,5 +23,6 @@ public class StopWatchTest {
 		System.out.println("Split nano time: " + stopWatch.getSplitNanoTime() + " ms");
 		System.out.println("Split time: " + stopWatch.getSplitTime() + " ms");
 
+		stopWatch.stop();
 	}
 }
