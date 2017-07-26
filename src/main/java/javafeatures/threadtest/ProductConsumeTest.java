@@ -1,7 +1,7 @@
 package javafeatures.threadtest;
 
 /**
- * TODO
+ * 多线程实现生产者消费者模式
  *
  * @author panws
  * @since 2017-07-24
@@ -10,110 +10,120 @@ public class ProductConsumeTest {
 
 	public static void main(String[] args) {
 
-		final Repository repository = new Repository(0);
+		Repository repository = new Repository(0);
 
-		Object locker = new Object();
+		Consumer consumer1 = new Consumer(repository, "A");
+		Consumer consumer2 = new Consumer(repository, "B");
+		Consumer consumer3 = new Consumer(repository, "C");
 
-		Consumer consumer1 = new Consumer(repository, locker);
-		Consumer consumer2 = new Consumer(repository, locker);
-		Consumer consumer3 = new Consumer(repository, locker);
-
-		Producer producer1 = new Producer(repository, locker);
-
-		new Thread(consumer2).start();
-
-		new Thread(producer1).start();
+		Producer producer1 = new Producer(repository, "a");
+		Producer producer2 = new Producer(repository, "b");
 
 		new Thread(consumer1).start();
-
-
+		new Thread(producer1).start();
+		new Thread(consumer2).start();
+		new Thread(producer2).start();
+		new Thread(consumer3).start();
 
 	}
 
 }
 
+/**
+ * 生产者
+ */
 class Producer implements Runnable {
 
 	private Repository repository;
 
-	private final Object locker;
+	private String name;
 
-	Producer(Repository repository, Object locker) {
+	Producer(Repository repository, String name) {
 		this.repository = repository;
-		this.locker = locker;
+		this.name = name;
 	}
 
 	@Override
-
 	public void run() {
-		synchronized (locker) {
-			while (true) {
+		while (true) {
+			synchronized (repository) {
+				if (repository.getAccumulativeValue() >= 30) {
+					System.out.println("生产数量已达上限，停止生产");
+					repository.notifyAll();
+					return;
+				}
 				if (repository.getProductAmount() >= 5) {
-					System.out.println("仓库已满，停止生产");
+					System.out.println("仓库已满，生产者" + name + "暂停生产");
 					try {
-						locker.wait();
+						repository.wait();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					return;
+					continue;
 				}
-				repository.setMax(repository.getMax() + 1);
+				repository.setAccumulativeValue(repository.getAccumulativeValue() + 1);
 				repository.setProductAmount(repository.getProductAmount() + 1);
-				System.out.println("生产者生产第" + repository.getProductAmount() + "个产品");
-				locker.notifyAll();
+				System.out.println("生产者" + name + "生产第" + repository.getProductAmount() + "个产品");
+				repository.notifyAll();
 			}
 		}
 
 	}
 }
 
+/**
+ * 消费者
+ */
 class Consumer implements Runnable {
 
 	private Repository repository;
 
-	private final Object locker;
+	private String name;
 
-	Consumer(Repository repository, Object locker) {
+	Consumer(Repository repository, String name) {
 		this.repository = repository;
-		this.locker = locker;
+		this.name = name;
 	}
 
 	@Override public void run() {
-		synchronized (locker) {
-			while (true) {
+		while (true) {
+			synchronized (repository) {
 				if (repository.getProductAmount() <= 0) {
-					System.out.println("产品缺货，无法消费");
+					System.out.println("产品缺货，消费者" + name + "无法消费");
 					try {
-						locker.wait();
+						repository.wait();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					return;
+					continue;
 				}
 				repository.setProductAmount(repository.getProductAmount() - 1);
-				System.out.println("消费者取走了第" + repository.getProductAmount() + "个产品");
-				locker.notifyAll();
+				System.out.println("消费者 " + name + " 取走了第" + (repository.getProductAmount() + 1) + "个产品");
+				repository.notifyAll();
 			}
 		}
 	}
 }
 
+/**
+ * 产品仓库
+ */
 class Repository {
 
-	private int max = 0;
+	private int accumulativeValue = 0;    //累计值
 
-	private int productAmount;
+	private int productAmount;    //库存
 
 	public Repository(int productAmount) {
 		this.productAmount = productAmount;
 	}
 
-	public int getMax() {
-		return max;
+	public int getAccumulativeValue() {
+		return accumulativeValue;
 	}
 
-	public void setMax(int max) {
-		this.max = max;
+	public void setAccumulativeValue(int accumulativeValue) {
+		this.accumulativeValue = accumulativeValue;
 	}
 
 	public int getProductAmount() {
