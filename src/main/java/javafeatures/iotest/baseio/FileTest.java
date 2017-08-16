@@ -1,4 +1,4 @@
-package javafeatures.iotest;
+package javafeatures.iotest.baseio;
 
 import java.io.File;
 import java.io.FilenameFilter;

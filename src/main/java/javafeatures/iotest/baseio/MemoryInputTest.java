@@ -1,4 +1,4 @@
-package javafeatures.iotest;
+package javafeatures.iotest.baseio;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;

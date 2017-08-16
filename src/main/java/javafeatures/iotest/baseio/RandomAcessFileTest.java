@@ -1,4 +1,4 @@
-package javafeatures.iotest;
+package javafeatures.iotest.baseio;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
