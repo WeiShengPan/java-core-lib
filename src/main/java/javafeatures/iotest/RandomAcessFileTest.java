@@ -13,35 +13,34 @@ public class RandomAcessFileTest {
 
 	public static void main(String[] args) throws IOException {
 
-		RandomAccessFile raf = new RandomAccessFile("src/main/resources/io/output3.txt", "rw");
+		try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/io/output3.txt", "rw")) {
 
-		for (int i = 0; i < 7; i++) {
-			raf.writeDouble(i * 1.4);
+			for (int i = 0; i < 7; i++) {
+				raf.writeDouble(i * 1.4);
+			}
+			raf.writeUTF("End of this file.");
+
+			display();
+
+			raf.seek(5 * 8);    //double 总是为8字节长，5*8表示查找第5个double值的位置
+			raf.writeDouble(1000);
+
+			display();
 		}
-		raf.writeUTF("End of this file.");
-
-		display();
-
-		raf.seek(5 * 8);
-		raf.writeDouble(1000);
-
-		display();
-
-		raf.close();
 
 	}
 
 	private static void display() throws IOException {
 
-		RandomAccessFile raf = new RandomAccessFile("src/main/resources/io/output3.txt", "r");
+		try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/io/output3.txt", "r")) {
 
-		for (int i = 0; i < 7; i++) {
-			System.out.println("Value " + i + ":" + raf.readDouble());
+			for (int i = 0; i < 7; i++) {
+				System.out.println("Value " + i + ":" + raf.readDouble());
+			}
+
+			System.out.println(raf.readUTF());
 		}
 
-		System.out.println(raf.readUTF());
-
-		raf.close();
 	}
 
 }

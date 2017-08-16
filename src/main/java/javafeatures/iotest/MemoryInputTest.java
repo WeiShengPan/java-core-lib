@@ -18,23 +18,26 @@ public class MemoryInputTest {
 		/**
 		 * memory input
 		 */
-		//先将数据导入到BufferReader，即内存中
-		StringReader in = new StringReader(BufferReaderTest.read("src/main/resources/io/input1.txt"));
+		try (StringReader in = new StringReader(BufferReaderTest.read("src/main/resources/io/input1.txt"))) {
 
-		int c;
+			int c;
 
-		while ((c = in.read()) != -1) {
-			System.out.println((char) c);
+			while ((c = in.read()) != -1) {
+				System.out.println((char) c);
+			}
+
 		}
 
 		/**
 		 * formatted memory input
 		 */
-		DataInputStream dataInputStream = new DataInputStream(
-				new ByteArrayInputStream(BufferReaderTest.read("src/main/resources/io/input1.txt").getBytes()));
+		try (DataInputStream dataInputStream = new DataInputStream(
+				new ByteArrayInputStream(BufferReaderTest.read("src/main/resources/io/input1.txt").getBytes()))) {
 
-		while (dataInputStream.available() != 0) {
-			System.out.print((char) dataInputStream.readByte());
+			while (dataInputStream.available() != 0) {
+				System.out.print((char) dataInputStream.readByte());
+			}
+
 		}
 
 	}
