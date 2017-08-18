@@ -15,7 +15,7 @@ public class SerializableTest {
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-		SerializedObject so = new SerializedObject("hello", "world", 100);
+		SerializedObject so = new SerializedObject("hello", "world", 100, new SerializedChildObject());
 
 		System.out.println(so);
 
@@ -27,7 +27,7 @@ public class SerializableTest {
 
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("src/main/resources/io/output9.txt"))) {
 
-			SerializedObject soCopy = (SerializedObject) in.readObject();
+			SerializedObject soCopy = (SerializedObject) in.readObject();    //deserialize to object
 
 			System.out.println(soCopy);
 		}
@@ -35,6 +35,8 @@ public class SerializableTest {
 	}
 
 	static class SerializedObject implements Serializable {
+
+		public static int NUM = 3;
 
 		private String name;
 
@@ -44,11 +46,18 @@ public class SerializableTest {
 
 		private SerializedInnerObject[] slist;
 
-		public SerializedObject(String name, String password, int value) {
+		private SerializedChildObject child;
+
+		public SerializedObject() {
+
+		}
+
+		public SerializedObject(String name, String password, int value, SerializedChildObject child) {
 
 			this.name = name;
 			this.password = password;
 			this.value = value;
+			this.child = child;
 
 			Random rand = new Random(value);
 
@@ -57,8 +66,8 @@ public class SerializableTest {
 		}
 
 		@Override public String toString() {
-			return new ToStringBuilder(this).append("name", name).append("password", password).append("value", value)
-					.append("slist", slist).toString();
+			return new ToStringBuilder(this).append("NUM", NUM).append("name", name).append("password", password)
+					.append("value", value).append("slist", slist).append("child", child).toString();
 		}
 	}
 
@@ -72,6 +81,19 @@ public class SerializableTest {
 
 		@Override public String toString() {
 			return Integer.toString(value);
+		}
+	}
+
+	static class SerializedChildObject extends SerializedObject {
+
+		private static int NUM_CHILD = NUM;
+
+		public SerializedChildObject() {
+			super();
+		}
+
+		@Override public String toString() {
+			return new ToStringBuilder(this).append("NUM_CHILD", NUM_CHILD).toString();
 		}
 	}
 
