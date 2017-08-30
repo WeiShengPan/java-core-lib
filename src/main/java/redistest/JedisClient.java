@@ -7,20 +7,28 @@ import redis.clients.jedis.Protocol;
 
 /**
  * 原生jedis操作
+ *
  * @author panws
  * @since 2017-08-29
  */
 public class JedisClient {
 
-	private static final JedisClient jedisClient = new JedisClient();
+	private static volatile JedisClient jedisClient;
 
-	private static final String host = "192.168.198.128";
+	private static final String host = "";
 
-	private static final String pwd = "ws02056954";
+	private static final String pwd = "";
 
 	private Jedis jedis = null;
 
 	public static JedisClient getInstance() {
+		if (null == jedisClient) {
+			synchronized (jedisClient) {
+				if (null == jedisClient) {
+					jedisClient = new JedisClient();
+				}
+			}
+		}
 		return jedisClient;
 	}
 
