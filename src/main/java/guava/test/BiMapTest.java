@@ -3,7 +3,7 @@ package guava.test;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.EnumHashBiMap;
 import com.google.common.collect.HashBiMap;
-import java.features.enumeration.test.EnumWeek;
+import javafeatures.enumeration.test.EnumWeek;
 
 /**
  * BiMap:双向Map，提供了key和value的双向关联
