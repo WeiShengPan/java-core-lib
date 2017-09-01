@@ -146,6 +146,11 @@ public class ListMethods {
 		System.out.println(linkedList.removeFirst());
 		System.out.println(linkedList.removeLast());
 		System.out.println(linkedList);
+
+		//LinkedList 实现Deque接口，具有Last In First Out的栈行为
+		linkedList.push("Last");
+		System.out.println(linkedList);
+		System.out.println(linkedList.pop());
 	}
 
 	public static void main(String[] args) {
