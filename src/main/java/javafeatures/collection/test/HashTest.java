@@ -1,5 +1,7 @@
 package javafeatures.collection.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,9 +15,9 @@ public class HashTest {
 
 	public static void main(String[] args) throws Exception {
 
-		detect(GroundHog.class);    //GroundHog类没有重写hashCode()和equals()方法，默认的方法会比较地址
+		detect(GroundHog.class);    //GroundHog没有重写hashCode()和equals()方法，默认的方法会比较地址
 
-		detect(GroundHog2.class);
+		detect(GroundHog2.class);    //GroundHog2重写了hashCode()和equals()方法
 
 	}
 
@@ -26,17 +28,22 @@ public class HashTest {
 		Map<GroundHog, Prediction> map = new HashMap<>();
 
 		for (int i = 0; i < 10; i++) {
+
 			map.put(ghog.newInstance(i), new Prediction());
 		}
 
-		System.out.println("Map = " + map);
+		PrintUtil.println("Map = " + map);
 
 		GroundHog gh = ghog.newInstance(3);
-		System.out.println("Looking up prediction for " + gh);
+
+		PrintUtil.println("Looking up prediction for " + gh);
+
 		if (map.containsKey(gh)) {
-			System.out.println(map.get(gh));
+
+			PrintUtil.println(map.get(gh));
 		} else {
-			System.out.println("Key not found: " + gh);
+
+			PrintUtil.println("Key not found: " + gh);
 		}
 	}
 }
@@ -65,6 +72,7 @@ class GroundHog2 extends GroundHog {
 	}
 
 	@Override public boolean equals(Object obj) {
+
 		return obj instanceof GroundHog2 && ((GroundHog2) obj).number == number;
 	}
 }
