@@ -1,0 +1,22 @@
+package javafeatures.innerclass.test;
+
+/**
+ * @author panws
+ * @since 2017-09-05
+ */
+public class InnerObj implements InnerInterface {
+
+	private int n;
+
+	public InnerObj(int n) {
+		this.n = n;
+	}
+
+	public int value() {
+		return n;
+	}
+
+	@Override public String read() {
+		return String.valueOf(n);
+	}
+}
