@@ -61,7 +61,7 @@ public class ListMethods {
 	}
 
 	/**
-	 * list 使用iterator遍历元素
+	 * list 使用ListIterator遍历元素(双向移动)
 	 *
 	 * @param a
 	 */
