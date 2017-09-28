@@ -1,9 +1,5 @@
 package javafeatures.collection.test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 /**
  * Override hashCode()
  *
