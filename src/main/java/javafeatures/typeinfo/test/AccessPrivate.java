@@ -48,6 +48,14 @@ public class AccessPrivate {
 		method.invoke(obj);
 	}
 
+	/**
+	 * modify hidden field
+	 *
+	 * @param obj
+	 * @param fieldName
+	 * @throws NoSuchFieldException
+	 * @throws IllegalAccessException
+	 */
 	private static void modifyHiddenField(Object obj, String fieldName)
 			throws NoSuchFieldException, IllegalAccessException {
 
