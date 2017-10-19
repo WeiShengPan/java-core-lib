@@ -1,5 +1,7 @@
 package javafeatures.io.test.nio;
 
+import javafeatures.util.PrintUtil;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Arrays;
@@ -10,22 +12,27 @@ import java.util.Arrays;
  */
 public class EndianTest {
 
+	private static final String VALUE = "abcdef";
+
 	public static void main(String[] args) {
 
 		ByteBuffer byteBuffer = ByteBuffer.wrap(new byte[12]);
 
-		byteBuffer.asCharBuffer().put("abcdef");    //默认采用高位优先
-		System.out.println(Arrays.toString(byteBuffer.array()));
+		//默认采用高位优先
+		byteBuffer.asCharBuffer().put(VALUE);
+		PrintUtil.println(Arrays.toString(byteBuffer.array()));
 		byteBuffer.rewind();
 
-		byteBuffer.order(ByteOrder.BIG_ENDIAN);        //采用高位优先
-		byteBuffer.asCharBuffer().put("abcdef");
-		System.out.println(Arrays.toString(byteBuffer.array()));
+		//手动指定采用高位优先
+		byteBuffer.order(ByteOrder.BIG_ENDIAN);
+		byteBuffer.asCharBuffer().put(VALUE);
+		PrintUtil.println(Arrays.toString(byteBuffer.array()));
 		byteBuffer.rewind();
 
-		byteBuffer.order(ByteOrder.LITTLE_ENDIAN);        //采用低位优先
-		byteBuffer.asCharBuffer().put("abcdef");
-		System.out.println(Arrays.toString(byteBuffer.array()));
+		//手动指定采用低位优先
+		byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
+		byteBuffer.asCharBuffer().put(VALUE);
+		PrintUtil.println(Arrays.toString(byteBuffer.array()));
 
 	}
 }

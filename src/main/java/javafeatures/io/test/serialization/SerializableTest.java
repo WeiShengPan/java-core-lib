@@ -1,5 +1,6 @@
 package javafeatures.io.test.serialization;
 
+import javafeatures.util.PrintUtil;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.*;
@@ -17,7 +18,7 @@ public class SerializableTest {
 
 		SerializedObject so = new SerializedObject("hello", "world", 100, new SerializedChildObject());
 
-		System.out.println(so);
+		PrintUtil.println(so);
 
 		try (ObjectOutputStream out = new ObjectOutputStream(
 				new FileOutputStream("src/main/resources/io/output9.txt"))) {
@@ -27,20 +28,24 @@ public class SerializableTest {
 
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("src/main/resources/io/output9.txt"))) {
 
-			SerializedObject soCopy = (SerializedObject) in.readObject();    //deserialize to object
+			//deserialize to object
+			SerializedObject soCopy = (SerializedObject) in.readObject();
 
-			System.out.println(soCopy);
+			PrintUtil.println(soCopy);
 		}
 
 	}
 
 	static class SerializedObject implements Serializable {
 
-		public static int NUM = 3;
+		public static final int NUM = 3;
 
 		private String name;
 
-		private transient String password;    //声明为transient可关闭该字段的序列化
+		/**
+		 * 声明为transient可关闭该字段的序列化
+		 */
+		private transient String password;
 
 		private int value;
 
@@ -86,7 +91,7 @@ public class SerializableTest {
 
 	static class SerializedChildObject extends SerializedObject {
 
-		private static int NUM_CHILD = NUM;
+		private static final int NUM_CHILD = NUM;
 
 		public SerializedChildObject() {
 			super();

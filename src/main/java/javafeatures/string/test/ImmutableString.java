@@ -1,5 +1,7 @@
 package javafeatures.string.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,28 +20,34 @@ public class ImmutableString {
 		 * String 传递的是引用的拷贝
 		 */
 		String str1 = "hello";
-		System.out.println(str1);
+		PrintUtil.println(str1);
 
-		String str2 = upCase(str1);    //实际传递的是引用的一个拷贝
-		System.out.println(str2);
-		System.out.println(str1);    //str1没有被改变
+		//实际传递的是引用的一个拷贝
+		String str2 = upCase(str1);
+		PrintUtil.println(str2);
+		//str1没有被改变
+		PrintUtil.println(str1);
 
 		String str3 = str1;
-		System.out.println(str1.equals(str2));
-		System.out.println(str1.equals(str3));    //所指向的是同一块物理区域
+		PrintUtil.println(str1.equals(str2));
+		//所指向的是同一块物理区域
+		PrintUtil.println(str1.equals(str3));
 
 		String str4 = "hello";
-		System.out.println(str1.equals(str4));    //指向的是同一块物理区域，所以相等
+		//指向的是同一块物理区域，所以相等
+		PrintUtil.println(str1.equals(str4));
 
 		/*
 		 * 对象传递的是引用
 		 */
 		StrObj obj1 = new StrObj();
 		obj1.add("hello");
-		System.out.println(obj1);
-		StrObj obj2 = add(obj1);    //实际传递的是对象的引用
-		System.out.println(obj2);
-		System.out.println(obj1);    //obj1被改变了
+		PrintUtil.println(obj1);
+		//实际传递的是对象的引用
+		StrObj obj2 = add(obj1);
+		PrintUtil.println(obj2);
+		//obj1被改变了
+		PrintUtil.println(obj1);
 	}
 
 	/**

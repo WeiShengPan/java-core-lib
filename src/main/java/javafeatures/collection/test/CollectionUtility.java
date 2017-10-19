@@ -66,13 +66,13 @@ public class CollectionUtility {
 
 	public static void sychronization() {
 
-		List<String> list = Collections.synchronizedList(new ArrayList<>());
+		List<String> list = Collections.synchronizedList(new ArrayList<>(10));
 
-		Set<String> set = Collections.synchronizedSet(new HashSet<>());
+		Set<String> set = Collections.synchronizedSet(new HashSet<>(10));
 
 		SortedSet<String> sortedSet = Collections.synchronizedSortedSet(new TreeSet<>());
 
-		Map<String, String> map = Collections.synchronizedMap(new HashMap<>());
+		Map<String, String> map = Collections.synchronizedMap(new HashMap<>(10));
 
 		SortedMap<String, String> sortedMap = Collections.synchronizedSortedMap(new TreeMap<>());
 

@@ -83,7 +83,10 @@ class Entrance implements Runnable {
 
 	private static volatile boolean canceled = false;
 
-	private int number = 0;    //单个入口的人数
+	/**
+	 * 单个入口的人数
+	 */
+	private int number = 0;
 
 	public Entrance(int id) {
 		this.id = id;

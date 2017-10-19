@@ -1,5 +1,7 @@
 package javafeatures.io.test.nio;
 
+import javafeatures.util.PrintUtil;
+
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -53,7 +55,8 @@ public class LockingMappedFile {
 			byteBuffer.limit(end);
 			byteBuffer.position(start);
 
-			this.byteBuffer = byteBuffer.slice();    //创建用于修改的slice片段
+			//创建用于修改的slice片段
+			this.byteBuffer = byteBuffer.slice();
 
 			this.add = add;
 
@@ -61,9 +64,10 @@ public class LockingMappedFile {
 
 		@Override public void run() {
 			try {
-				FileLock fileLock = fileChannel.tryLock(start, end, false);    //部分加锁
+				//部分加锁
+				FileLock fileLock = fileChannel.tryLock(start, end, false);
 
-				System.out.println("Locked: " + start + " to " + end);
+				PrintUtil.println("Locked: " + start + " to " + end);
 
 				while (byteBuffer.position() < byteBuffer.limit() - 1) {
 					byteBuffer.put((byte) (byteBuffer.get() + add));

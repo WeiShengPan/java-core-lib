@@ -1,5 +1,7 @@
 package javafeatures.io.test.nio;
 
+import javafeatures.util.PrintUtil;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -33,7 +35,8 @@ public class FileChannelTest {
 		//write from RandomAccessFile
 		try (FileChannel fc = new RandomAccessFile(FILE_PATH, "rw").getChannel()) {
 
-			fc.position(fc.size());    //move to the end of the file
+			//move to the end of the file
+			fc.position(fc.size());
 
 			fc.write(ByteBuffer.wrap("Some text in the end \n".getBytes()));
 		}
@@ -47,13 +50,14 @@ public class FileChannelTest {
 			fc.read(byteBuffer);
 			byteBuffer.flip();
 
-			CharsetDecoder decoder = StandardCharsets.UTF_8.newDecoder();    //解决编码问题
+			//解决编码问题
+			CharsetDecoder decoder = StandardCharsets.UTF_8.newDecoder();
 
 			CharBuffer charBuffer = CharBuffer.allocate(B_SIZE);
 			decoder.decode(byteBuffer, charBuffer, false);
 			charBuffer.flip();
 
-			System.out.println(charBuffer);
+			PrintUtil.println(charBuffer);
 		}
 	}
 }

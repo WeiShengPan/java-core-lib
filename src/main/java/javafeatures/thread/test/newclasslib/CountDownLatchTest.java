@@ -1,5 +1,7 @@
 package javafeatures.thread.test.newclasslib;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -19,8 +21,8 @@ public class CountDownLatchTest {
 
 	public static void main(String[] args) {
 
-		CountDownLatch countDownLatch = new CountDownLatch(
-				SIZE);    //设置一个初始计数器，countDown()会减小这个计数值，对await()的调用会被阻塞，直至计数值为0
+		//设置一个初始计数器，countDown()会减小这个计数值，对await()的调用会被阻塞，直至计数值为0
+		CountDownLatch countDownLatch = new CountDownLatch(SIZE);
 
 		ExecutorService executorService = Executors.newCachedThreadPool();
 
@@ -32,7 +34,7 @@ public class CountDownLatchTest {
 			executorService.execute(new TaskPortion(countDownLatch));
 		}
 
-		System.out.println("Launched all task");
+		PrintUtil.println("Launched all task");
 
 		executorService.shutdown();
 
@@ -57,10 +59,12 @@ class TaskPortion implements Runnable {
 
 		try {
 			TimeUnit.MILLISECONDS.sleep(random.nextInt(1000));
-			System.out.println(this + " complete.");
-			countDownLatch.countDown();        //计数值减1
+			PrintUtil.println(this + " complete.");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		} finally {
+			//计数值减1 (放到finally中保证运行)
+			countDownLatch.countDown();
 		}
 
 	}
@@ -88,7 +92,7 @@ class WaitingTask implements Runnable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Latch barrier passed for " + this);
+		PrintUtil.println("Latch barrier passed for " + this);
 	}
 
 	@Override public String toString() {

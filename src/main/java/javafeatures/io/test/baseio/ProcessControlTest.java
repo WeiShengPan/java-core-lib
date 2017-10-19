@@ -1,5 +1,7 @@
 package javafeatures.io.test.baseio;
 
+import javafeatures.util.PrintUtil;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,13 +14,17 @@ public class ProcessControlTest {
 
 	public static void main(String[] args) {
 
-		OSExecutor.executeCommand("javap ProcessControlTest");
+		OsExecutor.executeCommand("javap ProcessControlTest");
 	}
 }
 
-class OSExecutor {
+class OsExecutor {
 
-	public static void executeCommand(String command) {
+	private OsExecutor() {
+
+	}
+
+	static void executeCommand(String command) {
 
 		boolean errFlag = false;
 
@@ -30,12 +36,12 @@ class OSExecutor {
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			while ((s = in.readLine()) != null) {
-				System.out.println(s);
+				PrintUtil.println(s);
 			}
 
 			BufferedReader err = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 			while ((s = err.readLine()) != null) {
-				System.err.println("System.err :" + s);
+				PrintUtil.err("System.err :" + s);
 				errFlag = true;
 			}
 
@@ -48,14 +54,14 @@ class OSExecutor {
 		}
 
 		if (errFlag) {
-			throw new OSExecuteException("Errors executing " + command);
+			throw new OsExecuteException("Errors executing " + command);
 		}
 	}
 }
 
-class OSExecuteException extends RuntimeException {
+class OsExecuteException extends RuntimeException {
 
-	public OSExecuteException(String msg) {
+	OsExecuteException(String msg) {
 
 		super(msg);
 	}

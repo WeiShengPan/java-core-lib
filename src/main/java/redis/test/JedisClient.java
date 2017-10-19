@@ -1,5 +1,6 @@
 package redis.test;
 
+import javafeatures.util.PrintUtil;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -15,9 +16,9 @@ public class JedisClient {
 
 	private static volatile JedisClient jedisClient;
 
-	private static final String host = "";
+	private static final String HOST = "";
 
-	private static final String pwd = "";
+	private static final String PWD = "";
 
 	private Jedis jedis = null;
 
@@ -42,13 +43,13 @@ public class JedisClient {
 
 	public String add(String key, String value) {
 
-		try (JedisPool jedisPool = new JedisPool(getPoolConfig(), host, Protocol.DEFAULT_PORT, Protocol.DEFAULT_TIMEOUT,
-				pwd)) {
+		try (JedisPool jedisPool = new JedisPool(getPoolConfig(), HOST, Protocol.DEFAULT_PORT, Protocol.DEFAULT_TIMEOUT,
+				PWD)) {
 
 			jedis = jedisPool.getResource();
 
 			if (jedis.exists(key)) {
-				System.out.println("key already exist.");
+				PrintUtil.println("key already exist.");
 			}
 
 			return jedis.set(key, value);
@@ -58,8 +59,8 @@ public class JedisClient {
 
 	public String get(String key) {
 
-		try (JedisPool jedisPool = new JedisPool(getPoolConfig(), host, Protocol.DEFAULT_PORT, Protocol.DEFAULT_TIMEOUT,
-				pwd)) {
+		try (JedisPool jedisPool = new JedisPool(getPoolConfig(), HOST, Protocol.DEFAULT_PORT, Protocol.DEFAULT_TIMEOUT,
+				PWD)) {
 
 			jedis = jedisPool.getResource();
 
@@ -70,8 +71,8 @@ public class JedisClient {
 
 	public Boolean exists(String key) {
 
-		try (JedisPool jedisPool = new JedisPool(getPoolConfig(), host, Protocol.DEFAULT_PORT, Protocol.DEFAULT_TIMEOUT,
-				pwd)) {
+		try (JedisPool jedisPool = new JedisPool(getPoolConfig(), HOST, Protocol.DEFAULT_PORT, Protocol.DEFAULT_TIMEOUT,
+				PWD)) {
 
 			jedis = jedisPool.getResource();
 
@@ -82,8 +83,8 @@ public class JedisClient {
 
 	public Long delete(String key) {
 
-		try (JedisPool jedisPool = new JedisPool(getPoolConfig(), host, Protocol.DEFAULT_PORT, Protocol.DEFAULT_TIMEOUT,
-				pwd)) {
+		try (JedisPool jedisPool = new JedisPool(getPoolConfig(), HOST, Protocol.DEFAULT_PORT, Protocol.DEFAULT_TIMEOUT,
+				PWD)) {
 
 			jedis = jedisPool.getResource();
 
@@ -96,19 +97,19 @@ public class JedisClient {
 
 		JedisClient jedisClient = JedisClient.getInstance();
 
-		System.out.println(jedisClient.add("a", "hahaha"));
+		PrintUtil.println(jedisClient.add("a", "hahaha"));
 
-		System.out.println(jedisClient.get("a"));
-		System.out.println(jedisClient.get("b"));
+		PrintUtil.println(jedisClient.get("a"));
+		PrintUtil.println(jedisClient.get("b"));
 
-		System.out.println(jedisClient.exists("a"));
-		System.out.println(jedisClient.exists("b"));
+		PrintUtil.println(jedisClient.exists("a"));
+		PrintUtil.println(jedisClient.exists("b"));
 
-		System.out.println(jedisClient.delete("a"));
-		System.out.println(jedisClient.delete("b"));
+		PrintUtil.println(jedisClient.delete("a"));
+		PrintUtil.println(jedisClient.delete("b"));
 
-		System.out.println(jedisClient.exists("a"));
-		System.out.println(jedisClient.exists("b"));
+		PrintUtil.println(jedisClient.exists("a"));
+		PrintUtil.println(jedisClient.exists("b"));
 
 	}
 

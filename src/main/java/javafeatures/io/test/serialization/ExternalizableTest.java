@@ -1,5 +1,6 @@
 package javafeatures.io.test.serialization;
 
+import javafeatures.util.PrintUtil;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.*;
@@ -14,27 +15,29 @@ public class ExternalizableTest {
 
 		ExternalizedObject eo = new ExternalizedObject(1, "he");
 
-		System.out.println(eo);
+		PrintUtil.println(eo);
 
 		try (ObjectOutputStream out = new ObjectOutputStream(
 				new FileOutputStream("src/main/resources/io/output10.txt"))) {
 
-			System.out.println("Saving...");
+			PrintUtil.println("Saving...");
 
-			out.writeObject(eo);    //序列化时，会调用writeExternal写入数据
+			//序列化时，会调用writeExternal写入数据
+			out.writeObject(eo);
 
-			System.out.println("Saving end");
+			PrintUtil.println("Saving end");
 		}
 
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("src/main/resources/io/output10.txt"))) {
 
-			System.out.println("Recovering...");
+			PrintUtil.println("Recovering...");
 
-			ExternalizedObject eoCopy = (ExternalizedObject) in.readObject();    //恢复时，会调用默认的构造器，然后调用readExternal恢复数据
+			//恢复时，会调用默认的构造器，然后调用readExternal恢复数据
+			ExternalizedObject eoCopy = (ExternalizedObject) in.readObject();
 
-			System.out.println("Recovering end");
+			PrintUtil.println("Recovering end");
 
-			System.out.println(eoCopy);
+			PrintUtil.println(eoCopy);
 		}
 
 	}
@@ -47,12 +50,12 @@ public class ExternalizableTest {
 
 		public ExternalizedObject() {
 
-			System.out.println("default constructor.");
+			PrintUtil.println("default constructor.");
 		}
 
 		public ExternalizedObject(int i, String s) {
 
-			System.out.println("parameters constructor.");
+			PrintUtil.println("parameters constructor.");
 			this.i = i;
 			this.s = s;
 		}
@@ -63,7 +66,7 @@ public class ExternalizableTest {
 
 		@Override public void writeExternal(ObjectOutput out) throws IOException {
 
-			System.out.println("ExternalizedObject.writeExternal");
+			PrintUtil.println("ExternalizedObject.writeExternal");
 
 			//you must do this below.
 			out.writeObject(s);
@@ -72,7 +75,7 @@ public class ExternalizableTest {
 
 		@Override public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
 
-			System.out.println("ExternalizedObject.readExternal");
+			PrintUtil.println("ExternalizedObject.readExternal");
 
 			//you must do this below.
 			s = (String) in.readObject();

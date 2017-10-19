@@ -1,5 +1,7 @@
 package javafeatures.innerclass.test;
 
+import javafeatures.util.PrintUtil;
+
 /**
  * 示例内部类实现的接口
  *
@@ -8,17 +10,24 @@ package javafeatures.innerclass.test;
  */
 public interface InnerInterface {
 
+	/**
+	 * read
+	 * @return
+	 */
 	String read();
 
+	/** value
+	 * @return
+	 */
 	int value();
 
-	/*
+	/**
 	 * 嵌套类还可以在接口内定义，由于存在于接口内，自动为public和static
 	 */
 	class ClassInInterface implements InnerInterface {
 
 		@Override public String read() {
-			System.out.println("ClassInInterface");
+			PrintUtil.println("ClassInInterface");
 			return null;
 		}
 

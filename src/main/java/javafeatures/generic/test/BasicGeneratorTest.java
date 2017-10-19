@@ -1,5 +1,7 @@
 package javafeatures.generic.test;
 
+import javafeatures.util.PrintUtil;
+
 /**
  * @author panws
  * @since 2017-10-12
@@ -11,7 +13,7 @@ public class BasicGeneratorTest {
 		BasicGenerator<CountedObj> generator = BasicGenerator.create(CountedObj.class);
 
 		for (int i = 0; i < 5; i++) {
-			System.out.println(generator.next());
+			PrintUtil.println(generator.next());
 		}
 	}
 
@@ -29,7 +31,7 @@ class BasicGenerator<T> implements Generator {
 		return new BasicGenerator<>(type);
 	}
 
-	public T next() {
+	@Override public T next() {
 
 		try {
 			return type.newInstance();

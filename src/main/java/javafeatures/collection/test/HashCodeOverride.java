@@ -25,16 +25,21 @@ public class HashCodeOverride {
 		int result = 17;
 
 		//为对象内每个有意义的域f计算出一个int散列码，并合并计算到result中
-		result = 37 * result + (aBoolean ? 0 : 1);    // boolean = f?0:1
-		result = 37 * result + aString.hashCode();    //String = hashCode() .String对象如果包含相同字符会映射到同一块内存区域
-		result = 37 * result + anInt;                //byte char short int = (int)f
+		// boolean = f?0:1
+		result = 37 * result + (aBoolean ? 0 : 1);
+		//String = hashCode() .String对象如果包含相同字符会映射到同一块内存区域
+		result = 37 * result + aString.hashCode();
+		//byte char short int = (int)f
+		result = 37 * result + anInt;
 		result = 37 * result + (int) aByte;
 		result = 37 * result + (int) aChar;
 		result = 37 * result + (int) aShort;
-		result = 37 * result + (int) (aLong ^ (aLong >>> 32));    //long = (int)(f^(f>>>32))
-		result = 37 * result + Float.floatToIntBits(aFloat);    //float = Float.floatToIntBits(f)
-		result = 37 * result + (int) (Double.doubleToLongBits(aDouble) ^ (Double.doubleToLongBits(aDouble)
-				>>> 32));    //double = (int)(Double.doubleToLongBits(f)^(Double.doubleToLongBits(f)>>>32))
+		//long = (int)(f^(f>>>32))
+		result = 37 * result + (int) (aLong ^ (aLong >>> 32));
+		//float = Float.floatToIntBits(f)
+		result = 37 * result + Float.floatToIntBits(aFloat);
+		//double = (int)(Double.doubleToLongBits(f)^(Double.doubleToLongBits(f)>>>32))
+		result = 37 * result + (int) (Double.doubleToLongBits(aDouble) ^ (Double.doubleToLongBits(aDouble) >>> 32));
 		result = 37 * result + aObject.hashCode();
 
 		return result;

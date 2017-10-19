@@ -1,5 +1,7 @@
 package javafeatures.collection.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.TreeMap;
@@ -19,12 +21,12 @@ class SortedMapTest {
 	public static void main(String[] args) {
 
 		TreeMap<String, String> sortedMap = new TreeMap<>(Countries.capitals());
-		System.out.println(sortedMap);
+		PrintUtil.println(sortedMap);
 
 		String low = sortedMap.firstKey();
 		String high = sortedMap.lastKey();
-		System.out.println(low);
-		System.out.println(high);
+		PrintUtil.println(low);
+		PrintUtil.println(high);
 
 		Iterator<String> iterator = sortedMap.keySet().iterator();
 		for (int i = 0; i <= 6; i++) {
@@ -39,15 +41,15 @@ class SortedMapTest {
 					iterator.next();
 			}
 		}
-		System.out.println(low);
-		System.out.println(high);
+		PrintUtil.println(low);
+		PrintUtil.println(high);
 
-		System.out.println(sortedMap.subMap(low, high));
-		System.out.println(sortedMap.headMap(high));
-		System.out.println(sortedMap.tailMap(low));
+		PrintUtil.println(sortedMap.subMap(low, high));
+		PrintUtil.println(sortedMap.headMap(high));
+		PrintUtil.println(sortedMap.tailMap(low));
 
-		System.out.println(sortedMap.higherKey(low));
-		System.out.println(sortedMap.lowerKey(high));
+		PrintUtil.println(sortedMap.higherKey(low));
+		PrintUtil.println(sortedMap.lowerKey(high));
 
 	}
 }
@@ -60,16 +62,18 @@ class LinkedHashMapTest {
 	public static void main(String[] args) {
 
 		LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<>(Countries.capitals());
-		System.out.println(linkedHashMap);
+		PrintUtil.println(linkedHashMap);
 
-		linkedHashMap = new LinkedHashMap<>(16, 0.75f, true);    //创建一个以access order排序的LinkedHashMap
+		//创建一个以access order排序的LinkedHashMap
+		linkedHashMap = new LinkedHashMap<>(16, 0.75f, true);   
 		linkedHashMap.putAll(Countries.capitals());
-		System.out.println(linkedHashMap);
+		PrintUtil.println(linkedHashMap);
 
 		linkedHashMap.get("FRANCE");
 		linkedHashMap.get("GREECE");
-		System.out.println(linkedHashMap);    //基于LRU算法，最近最少使用的元素移至队列前面
+		//基于LRU算法，最近最少使用的元素移至队列前面
+		PrintUtil.println(linkedHashMap);
 		linkedHashMap.get("JAPAN");
-		System.out.println(linkedHashMap);
+		PrintUtil.println(linkedHashMap);
 	}
 }

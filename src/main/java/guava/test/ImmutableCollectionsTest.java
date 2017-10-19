@@ -2,6 +2,7 @@ package guava.test;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import javafeatures.util.PrintUtil;
 
 import java.util.*;
 
@@ -23,33 +24,35 @@ public class ImmutableCollectionsTest {
 		 */
 		Set<String> unmodifiableSet = Collections.unmodifiableSet(set);
 		set.remove("RED");
-		System.out.println(unmodifiableSet.size());
+		PrintUtil.println(unmodifiableSet.size());
 
 		/**
 		 *ImmutableSet
 		 */
-		ImmutableSet<String> immutableSet1 = ImmutableSet.of("RED", "GREEN");//直接生成
-		ImmutableSet<String> immutableSet2 = ImmutableSet.copyOf(set);//从set中拷贝,这种做法也有Collections.unmodifiableSet的问题
+		//直接生成
+		ImmutableSet<String> immutableSet1 = ImmutableSet.of("RED", "GREEN");
+		//从set中拷贝,这种做法也有Collections.unmodifiableSet的问题
+		ImmutableSet<String> immutableSet2 = ImmutableSet.copyOf(set);
 		set.remove("RED");
-		System.out.println(immutableSet1);
-		System.out.println(immutableSet2);
+		PrintUtil.println(immutableSet1);
+		PrintUtil.println(immutableSet2);
 		//immutableSet1.add("RED");//throw: java.lang.UnsupportedOperationException
 		ImmutableSet.Builder<String> builder1 = ImmutableSet.builder();
 		ImmutableSet<String> immutableSet3 = builder1.add("YELLOW").addAll(set).build();
-		System.out.println(immutableSet3);
+		PrintUtil.println(immutableSet3);
 
 		/**
 		 * ImmutableMap
 		 */
-		Map<String, String> map1 = new HashMap<>();
-		Map<Integer, Integer> map2 = new HashMap<>();
-		Map<String, Integer> map3 = new HashMap<>();
+		Map<String, String> map1 = new HashMap<>(5);
+		Map<Integer, Integer> map2 = new HashMap<>(5);
+		Map<String, Integer> map3 = new HashMap<>(5);
 		map1.put("1", "a");
 		map2.put(1, 1);
 		map3.put("b", 1);
 		ImmutableMap.Builder builder2 = ImmutableMap.builder();
 		@SuppressWarnings("unchecked") ImmutableMap<?, ?> immutableMap = builder2.putAll(map1).putAll(map2).putAll(map3)
 				.build();
-		System.out.println(immutableMap);
+		PrintUtil.println(immutableMap);
 	}
 }

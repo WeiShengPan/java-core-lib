@@ -1,5 +1,7 @@
 package javafeatures.thread.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -21,7 +23,8 @@ public class ThreadLocalTest {
 			executorService.execute(new Accessor(i));
 		}
 
-		TimeUnit.MICROSECONDS.sleep(5000);    //运行观察一段时间
+		//运行观察一段时间
+		TimeUnit.MICROSECONDS.sleep(5000);
 
 		executorService.shutdownNow();    //停止
 	}
@@ -38,7 +41,7 @@ class Accessor implements Runnable {
 	@Override public void run() {
 		while (!Thread.currentThread().isInterrupted()) {
 			ThreadLocalHolder.incr();
-			System.out.println(this);
+			PrintUtil.println(this);
 			Thread.yield();
 		}
 	}
@@ -50,6 +53,10 @@ class Accessor implements Runnable {
 
 class ThreadLocalHolder {
 
+	private ThreadLocalHolder() {
+
+	}
+
 	private static ThreadLocal<Integer> value = new ThreadLocal<Integer>() {
 
 		private Random random = new Random(47);
@@ -59,12 +66,18 @@ class ThreadLocalHolder {
 		}
 	};
 
-	//不需要声明为synchronized,ThreadLocal保证不会出现竞争
+	/**
+	 * 不需要声明为synchronized,ThreadLocal保证不会出现竞争
+	 */
 	public static void incr() {
 		value.set(value.get() + 1);
 	}
 
-	//不需要声明为synchronized,ThreadLocal保证不会出现竞争
+	/**
+	 * 不需要声明为synchronized,ThreadLocal保证不会出现竞争
+	 *
+	 * @return
+	 */
 	public static Integer get() {
 		return value.get();
 	}

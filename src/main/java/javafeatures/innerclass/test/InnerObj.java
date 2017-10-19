@@ -12,7 +12,7 @@ public class InnerObj implements InnerInterface {
 		this.n = n;
 	}
 
-	public int value() {
+	@Override public int value() {
 		return n;
 	}
 

@@ -15,9 +15,11 @@ public class HashTest {
 
 	public static void main(String[] args) throws Exception {
 
-		detect(GroundHog.class);    //GroundHog没有重写hashCode()和equals()方法，默认的方法会比较地址
+		//GroundHog没有重写hashCode()和equals()方法，默认的方法会比较地址
+		detect(GroundHog.class);
 
-		detect(GroundHog2.class);    //GroundHog2重写了hashCode()和equals()方法
+		//GroundHog2重写了hashCode()和equals()方法
+		detect(GroundHog2.class);
 
 	}
 
@@ -25,7 +27,7 @@ public class HashTest {
 
 		Constructor<T> ghog = type.getConstructor(int.class);
 
-		Map<GroundHog, Prediction> map = new HashMap<>();
+		Map<GroundHog, Prediction> map = new HashMap<>(10);
 
 		for (int i = 0; i < 10; i++) {
 

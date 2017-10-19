@@ -1,5 +1,7 @@
 package javafeatures.string.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,27 +13,31 @@ import java.util.regex.Pattern;
  */
 public class PatternTest {
 
+	private static final String REGEX = "[frb][aiu][gx]";
+
+	private static Pattern pattern = Pattern.compile(REGEX);
+
 	public static void main(String[] args) {
 
-		Matcher matcher = Pattern.compile("[frb][aiu][gx]").matcher("fix the rug with bags");
+		Matcher matcher = pattern.matcher("fix the rug with bags");
 		while (matcher.find()) {
-			System.out.print(matcher.group() + " ");
+			PrintUtil.print(matcher.group() + " ");
 		}
 
-		System.out.println();
+		PrintUtil.println();
 
 		//调用带参数的reset()，可以将Matcher应用于一个新的String
 		matcher.reset("fux the rig with rag");
 		while (matcher.find()) {
-			System.out.print(matcher.group() + " ");
+			PrintUtil.print(matcher.group() + " ");
 		}
 
-		System.out.println();
+		PrintUtil.println();
 
 		//调用不带参数的reset()，可以将Matcher对象重新设置到当前字符序列的起始位置
 		matcher.reset();
 		while (matcher.find()) {
-			System.out.print(matcher.group() + " ");
+			PrintUtil.print(matcher.group() + " ");
 		}
 	}
 }

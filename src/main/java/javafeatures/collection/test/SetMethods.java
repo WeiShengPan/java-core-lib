@@ -1,5 +1,7 @@
 package javafeatures.collection.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.*;
 
 /**
@@ -20,17 +22,21 @@ public class SetMethods {
 		/*
 		 * 异常操作
 		 */
-		test(new HashSet<>(), SetType.class);    //SetType没有恰当hashCode()方法，set中会有重复元素
-		test(new HashSet<>(), TreeType.class);    //TreeType没有恰当hashCode()方法，set中会有重复元素
+		//SetType没有恰当hashCode()方法，set中会有重复元素
+		test(new HashSet<>(), SetType.class);
+		//TreeType没有恰当hashCode()方法，set中会有重复元素
+		test(new HashSet<>(), TreeType.class);
+		//SetType没有实现Comparable接口，无法加入TreeSet中
 		try {
-			test(new TreeSet<>(), SetType.class);    //SetType没有实现Comparable接口，无法加入TreeSet中
+			test(new TreeSet<>(), SetType.class);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			PrintUtil.println(e.getMessage());
 		}
+		//HashType没有实现Comparable接口，无法加入TreeSet中
 		try {
-			test(new TreeSet<>(), HashType.class);    //HashType没有实现Comparable接口，无法加入TreeSet中
+			test(new TreeSet<>(), HashType.class);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			PrintUtil.println(e.getMessage());
 		}
 	}
 
@@ -42,11 +48,11 @@ public class SetMethods {
 
 		fill(set, type);
 
-		System.out.println(set);
+		PrintUtil.println(set);
 
 	}
 
-	static <T> Set<T> fill(Set<T> set, Class<T> type) {
+	private static <T> void fill(Set<T> set, Class<T> type) {
 
 		try {
 			for (int i = 0; i < 10; i++) {
@@ -55,8 +61,6 @@ public class SetMethods {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-
-		return set;
 	}
 }
 
@@ -107,12 +111,12 @@ class SortedSetTest {
 
 		Collections.addAll(sortedSet, "ONE TWO THREE FOUR FIVE SIX SEVEN EIGHT".split(" "));
 
-		System.out.println(sortedSet);
+		PrintUtil.println(sortedSet);
 
 		String low = sortedSet.first();
 		String high = sortedSet.last();
-		System.out.println(low);
-		System.out.println(high);
+		PrintUtil.println(low);
+		PrintUtil.println(high);
 
 		Iterator<String> iterator = sortedSet.iterator();
 		for (int i = 0; i <= 6; i++) {
@@ -127,12 +131,12 @@ class SortedSetTest {
 					iterator.next();
 			}
 		}
-		System.out.println(low);
-		System.out.println(high);
+		PrintUtil.println(low);
+		PrintUtil.println(high);
 
-		System.out.println(sortedSet.subSet(low, high));
-		System.out.println(sortedSet.headSet(high));
-		System.out.println(sortedSet.tailSet(low));
+		PrintUtil.println(sortedSet.subSet(low, high));
+		PrintUtil.println(sortedSet.headSet(high));
+		PrintUtil.println(sortedSet.tailSet(low));
 	}
 }
 

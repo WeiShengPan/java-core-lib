@@ -1,5 +1,7 @@
 package javafeatures.io.test.nio;
 
+import javafeatures.util.PrintUtil;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileLock;
@@ -17,10 +19,10 @@ public class FileLockingTest {
 			FileLock fileLock = out.getChannel().tryLock();
 
 			if (fileLock != null) {
-				System.out.println("Locked file");
-				Thread.currentThread().sleep(10000);
+				PrintUtil.println("Locked file");
+				Thread.sleep(10000);
 				fileLock.release();
-				System.out.println("Unlocked file");
+				PrintUtil.println("Unlocked file");
 			}
 		}
 	}

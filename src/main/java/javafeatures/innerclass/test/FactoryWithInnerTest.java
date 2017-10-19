@@ -1,5 +1,7 @@
 package javafeatures.innerclass.test;
 
+import javafeatures.util.PrintUtil;
+
 /**
  * 工厂方法与匿名内部类的结合
  *
@@ -15,55 +17,69 @@ public class FactoryWithInnerTest {
 	}
 
 	public static void main(String[] args) {
-		serviceConsumer(ServiceImpl1.factory);
-		serviceConsumer(ServiceImpl2.factory);
+		serviceConsumer(Service1Impl.FACTORY);
+		serviceConsumer(Service2Impl.FACTORY);
 	}
 }
 
 interface Service {
 
+	/**
+	 * m1
+	 */
 	void m1();
 
+	/**
+	 * m2
+	 */
 	void m2();
 }
 
 interface ServiceFactory {
 
+	/**
+	 * get service
+	 * @return
+	 */
 	Service getService();
 }
 
-class ServiceImpl1 implements Service {
+class Service1Impl implements Service {
 
-	private ServiceImpl1() {
+	private Service1Impl() {
 	}
 
 	@Override public void m1() {
-		System.out.println("ServiceImpl1.m1");
+		PrintUtil.println("Service1Impl.m1");
 	}
 
 	@Override public void m2() {
-		System.out.println("ServiceImpl1.m2");
+		PrintUtil.println("Service1Impl.m2");
 	}
 
-	//使用匿名内部类作为工厂
-	public static ServiceFactory factory = () -> new ServiceImpl1();
+	/**
+	 * 使用匿名内部类作为工厂
+	 */
+	static final ServiceFactory FACTORY = Service1Impl::new;
 
 }
 
-class ServiceImpl2 implements Service {
+class Service2Impl implements Service {
 
-	private ServiceImpl2() {
+	private Service2Impl() {
 	}
 
 	@Override public void m1() {
-		System.out.println("ServiceImpl2.m1");
+		PrintUtil.println("Service2Impl.m1");
 	}
 
 	@Override public void m2() {
-		System.out.println("ServiceImpl2.m2");
+		PrintUtil.println("Service2Impl.m2");
 	}
 
-	//使用匿名内部类作为工厂
-	public static ServiceFactory factory = () -> new ServiceImpl2();
+	/**
+	 * 使用匿名内部类作为工厂
+	 */
+	static final ServiceFactory FACTORY = Service2Impl::new;
 
 }

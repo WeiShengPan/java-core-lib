@@ -6,9 +6,13 @@ import java.util.*;
  * @author panws
  * @since 2017-08-30
  */
-public class Countries {
+class Countries {
 
-	public static final String[][] DATA = { { "CHINA", "Beijing" }, { "JAPAN", "Tokyo" }, { "KOREA", "Seoul" },
+	private Countries() {
+
+	}
+
+	static final String[][] DATA = { { "CHINA", "Beijing" }, { "JAPAN", "Tokyo" }, { "KOREA", "Seoul" },
 			{ "AUSTRALIA", "Canberra" }, { "AUSTRIA", "Vienna" }, { "FRANCE", "Paris" }, { "GREECE", "Athens" },
 			{ "ITALY", "Rome" }, { "CANADA", "Ottawa" }, { "CUBA", "Havana" } };
 
@@ -18,7 +22,7 @@ public class Countries {
 	 */
 	private static class FlyweightMap extends AbstractMap<String, String> {
 
-		/*
+		/**
 		 * 每个Map.Entry对象都只存储了它的索引，而不是实际的键和值。当调用getKey()和getValue()时，它会使用
 		 * 该索引来返回恰当的DATA元素
 		 */
@@ -38,7 +42,7 @@ public class Countries {
 				return DATA[index][1];
 			}
 
-			/*
+			/**
 			 * 不支持的操作
 			 */
 			@Override public String setValue(String value) {
@@ -58,7 +62,7 @@ public class Countries {
 			}
 		}
 
-		/*
+		/**
 		 * EntrySet确保size不会大于DATA的大小
 		 */
 		static class EntrySet extends AbstractSet<Map.Entry<String, String>> {
@@ -75,11 +79,11 @@ public class Countries {
 				}
 			}
 
-			public int size() {
+			@Override public int size() {
 				return size;
 			}
 
-			/*
+			/**
 			 * 每个迭代器只有一个Map.Entry。Entry对象被用作数据的视窗，它只包含DATA中的索引。每次调用next()方法
 			 * 时，Entry的index都会递增，指向下一元素，然后从next()返回该Iterator所持有的单一Entry对象
 			 */
@@ -101,17 +105,17 @@ public class Countries {
 				}
 			}
 
-			public Iterator<Map.Entry<String, String>> iterator() {
+			@Override public Iterator<Map.Entry<String, String>> iterator() {
 				return new Iter();
 			}
 		}
 
-		/*
+		/**
 		 * 定制的EntrySet
 		 */
 		private static Set<Map.Entry<String, String>> entries = new EntrySet(DATA.length);
 
-		/*
+		/**
 		 * 返回定制的EntrySet
 		 */
 		@Override public Set<Map.Entry<String, String>> entrySet() {
@@ -119,7 +123,7 @@ public class Countries {
 		}
 	}
 
-	/*
+	/**
 	 * 产生一个包含指定尺寸的EntrySet的FlyweightMap，用于重载过的capitals()和names()方法
 	 */
 	private static Map<String, String> select(final int size) {

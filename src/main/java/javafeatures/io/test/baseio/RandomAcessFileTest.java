@@ -1,5 +1,7 @@
 package javafeatures.io.test.baseio;
 
+import javafeatures.util.PrintUtil;
+
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
@@ -22,7 +24,8 @@ public class RandomAcessFileTest {
 
 			display();
 
-			raf.seek(5 * 8);    //double 总是为8字节长，5*8表示查找第5个double值的位置
+			//double 总是为8字节长，5*8表示查找第5个double值的位置
+			raf.seek(5 * 8);
 			raf.writeDouble(1000);
 
 			display();
@@ -35,10 +38,10 @@ public class RandomAcessFileTest {
 		try (RandomAccessFile raf = new RandomAccessFile("src/main/resources/io/output3.txt", "r")) {
 
 			for (int i = 0; i < 7; i++) {
-				System.out.println("Value " + i + ":" + raf.readDouble());
+				PrintUtil.println("Value " + i + ":" + raf.readDouble());
 			}
 
-			System.out.println(raf.readUTF());
+			PrintUtil.println(raf.readUTF());
 		}
 
 	}

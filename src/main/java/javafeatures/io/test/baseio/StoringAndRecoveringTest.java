@@ -13,7 +13,8 @@ public class StoringAndRecoveringTest {
 		try (DataOutputStream out = new DataOutputStream(
 				new BufferedOutputStream(new FileOutputStream("src/main/resources/io/output2.txt")))) {
 
-			out.writeDouble(3.1415926);    //存储到流中，相应的read方法可以恢复它
+			//存储到流中，相应的read方法可以恢复它
+			out.writeDouble(3.1415926);
 			out.writeUTF("That is pi");
 			out.writeBoolean(true);
 			out.write(1);

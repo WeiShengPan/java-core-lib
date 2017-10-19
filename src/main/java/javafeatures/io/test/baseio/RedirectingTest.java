@@ -1,5 +1,7 @@
 package javafeatures.io.test.baseio;
 
+import javafeatures.util.PrintUtil;
+
 import java.io.*;
 
 /**
@@ -20,8 +22,10 @@ public class RedirectingTest {
 			try (PrintStream out = new PrintStream(
 					new BufferedOutputStream(new FileOutputStream("src/main/resources/io/output4.txt")))) {
 
-				System.setIn(in);    //将标准输入重定向到文件中
-				System.setOut(out);    //将标准输出重定向到文件中
+				//将标准输入重定向到文件中
+				System.setIn(in);
+				//将标准输出重定向到文件中
+				System.setOut(out);
 				System.setErr(out);
 
 				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -29,7 +33,7 @@ public class RedirectingTest {
 				String s;
 
 				while ((s = br.readLine()) != null) {
-					System.out.println(s);
+					PrintUtil.println(s);
 				}
 
 			}

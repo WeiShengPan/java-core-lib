@@ -1,5 +1,7 @@
 package javafeatures.io.test.baseio;
 
+import javafeatures.util.PrintUtil;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Arrays;
@@ -17,12 +19,13 @@ public class FileTest {
 		String regex = "Range.*?";
 
 		String[] list = path.list((dir, name) -> Pattern.compile(regex).matcher(name).matches());
-		String[] list2 = path.list(new DirFilter(regex));	//与使用匿名内部类等价
+		//与使用匿名内部类等价
+		String[] list2 = path.list(new DirFilter(regex));
 
 		Arrays.sort(list, String.CASE_INSENSITIVE_ORDER);
 
 		for (String dirItem : list) {
-			System.out.println(dirItem);
+			PrintUtil.println(dirItem);
 		}
 	}
 }

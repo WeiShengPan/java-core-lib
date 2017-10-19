@@ -1,5 +1,7 @@
 package javafeatures.collection.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,34 +30,51 @@ public class ListMethods {
 	 */
 	public static void basicTest(List<String> a) {
 
-		a.add(1, "x");    //指定index添加元素
-		a.add("x");    //在末尾添加元素
-		a.addAll(3, Countries.names(5));    //指定index添加一个集合中的所有元素
-		a.addAll(Countries.names(5));    //在末尾添加一个集合中的所有元素
+		//指定index添加元素
+		a.add(1, "x");
+		//在末尾添加元素
+		a.add("x");
+		//指定index添加一个集合中的所有元素
+		a.addAll(3, Countries.names(5));
+		//在末尾添加一个集合中的所有元素
+		a.addAll(Countries.names(5));
 
-		b = a.contains("1");    //是否包含指定元素
-		b = a.containsAll(Countries.names(5));    //是否包含集合中的所有元素
+		//是否包含指定元素
+		b = a.contains("1");
+		//是否包含集合中的所有元素
+		b = a.containsAll(Countries.names(5));
 
-		s = a.get(1);    //指定index获取元素
-		i = a.indexOf("1");    //获取元素的index
-		i = a.lastIndexOf("1");    //最后一个匹配上的index
+		//指定index获取元素
+		s = a.get(1);
+		//获取元素的index
+		i = a.indexOf("1");
+		//最后一个匹配上的index
+		i = a.lastIndexOf("1");
 
-		b = a.isEmpty();    //列表是否为空
+		//列表是否为空
+		b = a.isEmpty();
 
 		it = a.iterator();
 		lit = a.listIterator();
-		lit = a.listIterator(3);    //从指定index开始的ListIterator
+		//从指定index开始的ListIterator
+		lit = a.listIterator(3);
 
-		a.remove(1);    //移除指定index的元素
-		a.remove("1");    //移除指定元素
+		//移除指定index的元素
+		a.remove(1);
+		//移除指定元素
+		a.remove("1");
 
-		a.set(1, "1");    //设置index的值
+		//设置index的值
+		a.set(1, "1");
 
-		a.retainAll(Countries.names(5));    //取交集
+		//取交集
+		a.retainAll(Countries.names(5));
 
-		a.removeAll(Countries.names(5));    //移除指定集合中的所有元素
+		//移除指定集合中的所有元素
+		a.removeAll(Countries.names(5));
 
-		a.clear();    //清除所有元素
+		//清除所有元素
+		a.clear();
 
 		i = a.size();
 	}
@@ -89,10 +108,12 @@ public class ListMethods {
 		ListIterator<String> listIterator = a.listIterator();
 
 		listIterator.add("1");
-		listIterator.next();    //需要运动到下一个元素
+		//需要运动到下一个元素
+		listIterator.next();
 
 		listIterator.remove();
-		listIterator.next();    //需要移动到下一个元素
+		//需要移动到下一个元素
+		listIterator.next();
 
 		listIterator.set("2");
 	}
@@ -104,26 +125,26 @@ public class ListMethods {
 	 */
 	public static void testVisual(List<String> a) {
 
-		System.out.println(a);
+		PrintUtil.println(a);
 		List<String> b = Countries.names(5);
-		System.out.println(b);
+		PrintUtil.println(b);
 		a.addAll(b);
 		a.addAll(b);
-		System.out.println(a);
+		PrintUtil.println(a);
 
 		ListIterator<String> listIterator = a.listIterator(a.size() / 2);
 		listIterator.add("ONE");
-		System.out.println(a);
-		System.out.println(listIterator.next());
+		PrintUtil.println(a);
+		PrintUtil.println(listIterator.next());
 		listIterator.remove();
-		System.out.println(listIterator.next());
+		PrintUtil.println(listIterator.next());
 		listIterator.set("TWO");
-		System.out.println(a);
+		PrintUtil.println(a);
 
 		while (listIterator.hasPrevious()) {
-			System.out.print(listIterator.previous() + " ");
+			PrintUtil.print(listIterator.previous() + " ");
 		}
-		System.out.println();
+		PrintUtil.println();
 	}
 
 	/**
@@ -134,23 +155,23 @@ public class ListMethods {
 		LinkedList<String> linkedList = new LinkedList<>();
 
 		linkedList.addAll(Countries.names(5));
-		System.out.println(linkedList);
+		PrintUtil.println(linkedList);
 
 		linkedList.add("ONE");
 		linkedList.add("TWO");
-		System.out.println(linkedList);
+		PrintUtil.println(linkedList);
 
-		System.out.println(linkedList.getFirst());
-		System.out.println(linkedList.getLast());
+		PrintUtil.println(linkedList.getFirst());
+		PrintUtil.println(linkedList.getLast());
 
-		System.out.println(linkedList.removeFirst());
-		System.out.println(linkedList.removeLast());
-		System.out.println(linkedList);
+		PrintUtil.println(linkedList.removeFirst());
+		PrintUtil.println(linkedList.removeLast());
+		PrintUtil.println(linkedList);
 
 		//LinkedList 实现Deque接口，具有Last In First Out的栈行为
 		linkedList.push("Last");
-		System.out.println(linkedList);
-		System.out.println(linkedList.pop());
+		PrintUtil.println(linkedList);
+		PrintUtil.println(linkedList.pop());
 	}
 
 	public static void main(String[] args) {

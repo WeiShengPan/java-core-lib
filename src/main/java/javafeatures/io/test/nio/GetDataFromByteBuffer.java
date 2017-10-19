@@ -1,5 +1,7 @@
 package javafeatures.io.test.nio;
 
+import javafeatures.util.PrintUtil;
+
 import java.nio.ByteBuffer;
 
 /**
@@ -14,26 +16,27 @@ public class GetDataFromByteBuffer {
 
 	public static void main(String[] args) {
 
-		ByteBuffer byteBuffer = ByteBuffer.allocate(B_SIZE);    //缓冲器分配自动置零
+		//缓冲器分配自动置零
+		ByteBuffer byteBuffer = ByteBuffer.allocate(B_SIZE);
 
 		int i = 0;
 		while (i++ < byteBuffer.limit()) {
 			if (byteBuffer.get() != 0) {
-				System.out.println("nonzero");
+				PrintUtil.println("nonzero");
 			}
 		}
-		System.out.println("i = " + i);
+		PrintUtil.println("i = " + i);
 
 		byteBuffer.rewind();    //Rewinds this buffer.  The position is set to zero and the mark is discarded.
 
 		byteBuffer.asCharBuffer().put("Hello world!");
-		System.out.println(byteBuffer.asCharBuffer());
+		PrintUtil.println(byteBuffer.asCharBuffer());
 
 		byteBuffer.asIntBuffer().put(1123123);
-		System.out.println(byteBuffer.getInt());
+		PrintUtil.println(byteBuffer.getInt());
 
 		byteBuffer.asDoubleBuffer().put(12312.123123123);
-		System.out.println(byteBuffer.getDouble());
+		PrintUtil.println(byteBuffer.getDouble());
 
 	}
 }

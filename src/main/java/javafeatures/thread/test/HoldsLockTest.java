@@ -36,7 +36,7 @@ class MyThread extends Thread {
 		this.locker = locker;
 	}
 
-	public void run() {
+	@Override public void run() {
 		System.out.println(Thread.currentThread().getName() + " holds lock:" + Thread.holdsLock(locker));
 		synchronized (locker) {
 			try {

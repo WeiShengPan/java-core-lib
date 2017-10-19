@@ -15,6 +15,7 @@ import java.util.TreeSet;
  */
 public enum EnumWeek {
 
+	//周一
 	MON(1) {
 		@Override public void abstractJob() {
 			System.out.println("Do home work.");
@@ -23,27 +24,33 @@ public enum EnumWeek {
 		@Override public void normalJob() {
 			System.out.println("Customized job.");
 		}
-	}, TUE(2) {
+	}, //周二
+	TUE(2) {
 		@Override public void abstractJob() {
 			System.out.println("Do some cleaning.");
 		}
-	}, WED(3) {
+	},  //周三
+	WED(3) {
 		@Override public void abstractJob() {
 			System.out.println("Play games.");
 		}
-	}, THU(4) {
+	},    //周四
+	THU(4) {
 		@Override public void abstractJob() {
 			System.out.println("Listen music.");
 		}
-	}, FRI(5) {
+	},     //周五
+	FRI(5) {
 		@Override public void abstractJob() {
 			System.out.println("Do exercises.");
 		}
-	}, SAT(6) {
+	},     //周六
+	SAT(6) {
 		@Override public void abstractJob() {
 			System.out.println("Go dating.");
 		}
-	}, SUN(7) {
+	},    //周日
+	SUN(7) {
 		@Override public void abstractJob() {
 			System.out.println("Go sleeping.");
 		}

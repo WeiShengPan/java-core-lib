@@ -1,5 +1,7 @@
 package javafeatures.typeinfo.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -51,32 +53,40 @@ class DynamicProxyHandler implements InvocationHandler {
 
 	@Override public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-		System.out.println("**** proxy: " + proxy.getClass() + ". method:  " + method + ". args: " + args);
+		PrintUtil.println("**** proxy: " + proxy.getClass() + ". method:  " + method + ". args: " + args);
 
 		if (args != null) {
 			for (Object arg : args) {
-				System.out.println(" " + arg);
+				PrintUtil.println(" " + arg);
 			}
 		}
 
-		return method.invoke(proxied, args);    //先执行代理的操作，最后使用method.invoke将请求转发给被代理的对象
+		//先执行代理的操作，最后使用method.invoke将请求转发给被代理的对象
+		return method.invoke(proxied, args);
 	}
 }
 
 interface Interface {
 
+	/**
+	 * do something
+	 */
 	void doSomething();
 
+	/**
+	 * do something else
+	 * @param arg
+	 */
 	void doSomethingElse(String arg);
 }
 
 class RealObject implements Interface {
 
 	@Override public void doSomething() {
-		System.out.println("doSomething");
+		PrintUtil.println("doSomething");
 	}
 
 	@Override public void doSomethingElse(String arg) {
-		System.out.println("doSomethingElse " + arg);
+		PrintUtil.println("doSomethingElse " + arg);
 	}
 }

@@ -34,7 +34,7 @@ class ThreadA extends Thread {
 		this.lockB = lockB;
 	}
 
-	public void run() {
+	@Override public void run() {
 		synchronized (lockA) {
 			System.out.println(this.getClass().getName() + " holds lockA.");
 			try {
@@ -62,7 +62,7 @@ class ThreadB extends Thread {
 		this.lockB = lockB;
 	}
 
-	public void run() {
+	@Override public void run() {
 		synchronized (lockB) {
 			System.out.println(this.getClass().getName() + " holds lockB.");
 			try {

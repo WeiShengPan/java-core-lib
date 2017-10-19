@@ -16,7 +16,10 @@ interface Null {
 
 class Person {
 
-	public static final Person NULL = new NullPerson();    //空对象的单例
+	/**
+	 * 空对象的单例
+	 */
+	public static final Person NULL = new NullPerson();
 
 	public final String first;
 

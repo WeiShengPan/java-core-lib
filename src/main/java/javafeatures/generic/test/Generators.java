@@ -10,7 +10,7 @@ public class Generators {
 
 	public static <T> Collection<T> fill(Collection<T> coll, Generator<T> gen, int n) {
 
-		for (int i=0;i<n;i++) {
+		for (int i = 0; i < n; i++) {
 			coll.add(gen.next());
 		}
 
@@ -20,6 +20,11 @@ public class Generators {
 
 interface Generator<T> {
 
+	/**
+	 * next
+	 *
+	 * @return
+	 */
 	T next();
 }
 

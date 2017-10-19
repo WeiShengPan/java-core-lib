@@ -23,11 +23,18 @@ abstract class Base {
 	public void throwOne() throws OneException {
 	}
 
+	/**
+	 * declare throw TwoException
+	 * @throws TwoException
+	 */
 	public abstract void throwTwo() throws TwoException;
 
 	public void normalOne() {
 	}
 
+	/**
+	 * not declare throw any exception
+	 */
 	public abstract void normalTwo();
 }
 

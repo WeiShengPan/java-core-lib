@@ -35,7 +35,8 @@ class DaemonThreadFactory implements ThreadFactory {
 	@Override public Thread newThread(Runnable r) {
 		Thread thread = new Thread(r);
 
-		thread.setDaemon(true);        //将所有线程设置为后台线程
+		//将所有线程设置为后台线程
+		thread.setDaemon(true);
 
 		return thread;
 	}

@@ -28,7 +28,8 @@ public class AccessPrivate {
 		modifyHiddenField(hidden, "i");
 		modifyHiddenField(hidden, "s");
 		modifyHiddenField(hidden, "s2");
-		System.out.println("After modified: " + hidden);    //结果中i和s2被修改，s1未被修改
+		//结果中i和s2被修改，s1未被修改
+		System.out.println("After modified: " + hidden);
 	}
 
 	/**

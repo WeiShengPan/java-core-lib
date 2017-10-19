@@ -1,6 +1,7 @@
 package javafeatures.string.test;
 
 import com.google.common.collect.Lists;
+import javafeatures.util.PrintUtil;
 
 /**
  * @author panws
@@ -15,15 +16,17 @@ public class RegexTest {
 		// 需要两个反斜杠
 		String regex = "-?\\d";
 
-		System.out.println(String.format("String: %s", str));
+		PrintUtil.println(String.format("String: %s", str));
 
-		System.out.println(str.matches("\\d+"));
-		System.out.println("abcd".matches("bc"));
+		PrintUtil.println(str.matches("\\d+"));
+		PrintUtil.println("abcd".matches("bc"));
 
-		System.out.println(Lists.newArrayList(str.split("(-|\\+)")));
-		System.out.println(Lists.newArrayList(str.split("(-|\\+)", 3)));    //限制分隔次数
+		PrintUtil.println(Lists.newArrayList(str.split("(-|\\+)")));
+		//限制分隔次数
+		PrintUtil.println(Lists.newArrayList(str.split("(-|\\+)", 3)));
 
-		System.out.println(Lists.newArrayList(str.replaceAll("(-|\\+)", "|")));    //正则匹配替换
+		//正则匹配替换
+		PrintUtil.println(Lists.newArrayList(str.replaceAll("(-|\\+)", "|")));    
 
 	}
 }

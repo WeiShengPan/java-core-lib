@@ -36,7 +36,8 @@ public class BiMapTest {
 		 */
 		System.out.println("BiMap要求key和value都有唯一性");
 		biMap.forcePut("BLACK", 1);
-		System.out.println(biMap.get("RED"));    //RED is no longer exist
+		//RED is no longer exist
+		System.out.println(biMap.get("RED"));
 		System.out.println(biMap.get("BLACK"));
 		System.out.println(biMap.inverse().get(1));
 

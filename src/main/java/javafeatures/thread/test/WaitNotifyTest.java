@@ -1,5 +1,7 @@
 package javafeatures.thread.test;
 
+import javafeatures.util.PrintUtil;
+
 /**
  * @author panws
  * @since 2017-07-24
@@ -14,9 +16,9 @@ public class WaitNotifyTest {
 		WaitNotifyTread pb = new WaitNotifyTread("B", a, b);
 		WaitNotifyTread pc = new WaitNotifyTread("C", b, c);
 
-
+		//每个线程开始后，休眠一小段时间，确保按顺序A、B、C执行
 		new Thread(pa).start();
-		Thread.sleep(100);  //确保按顺序A、B、C执行
+		Thread.sleep(100);
 		new Thread(pb).start();
 		Thread.sleep(100);
 		new Thread(pc).start();
@@ -27,9 +29,9 @@ public class WaitNotifyTest {
 
 class WaitNotifyTread implements Runnable {
 
-	private String name;
-	private Object prev;
-	private Object self;
+	private final String name;
+	private final Object prev;
+	private final Object self;
 
 	public WaitNotifyTread(String name, Object prev, Object self) {
 		this.name = name;
@@ -42,9 +44,9 @@ class WaitNotifyTread implements Runnable {
 		while (count > 0) {
 			synchronized (prev) {
 				synchronized (self) {
-					System.out.print(name);
+					PrintUtil.print(name);
 					count--;
-					self.notify();
+					self.notifyAll();
 				}
 				try {
 					prev.wait();

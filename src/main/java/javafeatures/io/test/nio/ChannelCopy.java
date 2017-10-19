@@ -34,10 +34,14 @@ public class ChannelCopy {
 
 		ByteBuffer byteBuffer = ByteBuffer.allocate(B_SIZE);
 
-		while (in.read(byteBuffer) != -1) {    //FileChannel.read()返回-1表示到达输入末尾
-			byteBuffer.flip();    //准备缓冲器，以便信息可被write读取
-			out.write(byteBuffer);    //write之后，信息仍在缓冲器内
-			byteBuffer.clear();    //对所有内部指针重新安排，以便缓冲器在另一个read操作期间能够做好接受数据的准备
+		//FileChannel.read()返回-1表示到达输入末尾
+		while (in.read(byteBuffer) != -1) {
+			//准备缓冲器，以便信息可被write读取
+			byteBuffer.flip();
+			//write之后，信息仍在缓冲器内
+			out.write(byteBuffer);
+			//对所有内部指针重新安排，以便缓冲器在另一个read操作期间能够做好接受数据的准备
+			byteBuffer.clear();
 		}
 	}
 

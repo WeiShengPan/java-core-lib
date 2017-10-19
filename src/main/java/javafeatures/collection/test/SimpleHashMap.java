@@ -59,7 +59,8 @@ public class SimpleHashMap<K, V> extends AbstractMap<K, V> {
 
 		LinkedList<MapEntry<K, V>> bucket = buckets[index];
 
-		MapEntry<K, V> pair = new MapEntry<>(key, value);	//新的键值对
+		//新的键值对
+		MapEntry<K, V> pair = new MapEntry<>(key, value);
 
 		boolean found = false;
 

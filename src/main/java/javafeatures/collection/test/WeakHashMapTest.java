@@ -1,5 +1,7 @@
 package javafeatures.collection.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.WeakHashMap;
 
 /**
@@ -23,14 +25,15 @@ public class WeakHashMapTest {
 
 			//每隔3个元素将键的普通引用放入到数组中，保证其不会被回收
 			if (i % 3 == 0) {
-				keys[i] = k;    //save as real references
+				//save as real references
+				keys[i] = k;
 			}
 
 			map.put(k, v);
 		}
 
 		System.gc();
-		System.out.println(map);
+		PrintUtil.println(map);
 	}
 
 }
@@ -56,7 +59,7 @@ class Element {
 	}
 
 	@Override protected void finalize() throws Throwable {
-		System.out.println("Finalizing " + getClass().getSimpleName() + " " + id);
+		PrintUtil.println("Finalizing " + getClass().getSimpleName() + " " + id);
 	}
 }
 

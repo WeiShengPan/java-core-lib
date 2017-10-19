@@ -1,5 +1,7 @@
 package javafeatures.thread.test;
 
+import javafeatures.util.PrintUtil;
+
 /**
  * 多线程实现生产者消费者模式
  *
@@ -43,17 +45,16 @@ class Producer implements Runnable {
 		this.name = name;
 	}
 
-	@Override
-	public void run() {
+	@Override public void run() {
 		while (true) {
 			synchronized (repository) {
 				if (repository.getAccumulativeValue() >= 30) {
-					System.out.println("生产数量已达上限，停止生产");
+					PrintUtil.println("生产数量已达上限，停止生产");
 					repository.notifyAll();
 					return;
 				}
 				if (repository.getProductAmount() >= 5) {
-					System.out.println("仓库已满，生产者" + name + "暂停生产");
+					PrintUtil.println("仓库已满，生产者" + name + "暂停生产");
 					try {
 						repository.wait();
 					} catch (InterruptedException e) {
@@ -63,7 +64,7 @@ class Producer implements Runnable {
 				}
 				repository.setAccumulativeValue(repository.getAccumulativeValue() + 1);
 				repository.setProductAmount(repository.getProductAmount() + 1);
-				System.out.println("生产者" + name + "生产第" + repository.getProductAmount() + "个产品");
+				PrintUtil.println("生产者" + name + "生产第" + repository.getProductAmount() + "个产品");
 				repository.notifyAll();
 			}
 		}
@@ -89,7 +90,7 @@ class Consumer implements Runnable {
 		while (true) {
 			synchronized (repository) {
 				if (repository.getProductAmount() <= 0) {
-					System.out.println("产品缺货，消费者" + name + "无法消费");
+					PrintUtil.println("产品缺货，消费者" + name + "无法消费");
 					try {
 						repository.wait();
 					} catch (InterruptedException e) {
@@ -98,7 +99,7 @@ class Consumer implements Runnable {
 					continue;
 				}
 				repository.setProductAmount(repository.getProductAmount() - 1);
-				System.out.println("消费者 " + name + " 取走了第" + (repository.getProductAmount() + 1) + "个产品");
+				PrintUtil.println("消费者 " + name + " 取走了第" + (repository.getProductAmount() + 1) + "个产品");
 				repository.notifyAll();
 			}
 		}
@@ -110,9 +111,15 @@ class Consumer implements Runnable {
  */
 class Repository {
 
-	private int accumulativeValue = 0;    //累计值
+	/**
+	 * 累计值
+	 */
+	private int accumulativeValue = 0;
 
-	private int productAmount;    //库存
+	/**
+	 * 库存
+	 */
+	private int productAmount;
 
 	public Repository(int productAmount) {
 		this.productAmount = productAmount;

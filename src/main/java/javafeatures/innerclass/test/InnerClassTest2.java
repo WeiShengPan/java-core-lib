@@ -1,5 +1,7 @@
 package javafeatures.innerclass.test;
 
+import javafeatures.util.PrintUtil;
+
 /**
  * 匿名内部类的使用
  *
@@ -12,7 +14,7 @@ public class InnerClassTest2 {
 
 		return new InnerInterface() {
 			@Override public String read() {
-				System.out.println(s);
+				PrintUtil.println(s);
 				return s;
 			}
 
@@ -25,9 +27,10 @@ public class InnerClassTest2 {
 	public InnerInterface getInnerWithParam(int n) {
 
 		return new InnerObj(n) {
-			public int value() {
-				int value = super.value() * 3;    //尽管InnerObj是一个具有具体实现的普通类，但它还是被导出类当做公共接口来使用，最终结果value为 n * 3
-				System.out.println(value);
+			@Override public int value() {
+				//尽管InnerObj是一个具有具体实现的普通类，但它还是被导出类当做公共接口来使用，最终结果value为 n * 3
+				int value = super.value() * 3;
+				PrintUtil.println(value);
 				return value;
 			}
 		};
@@ -39,11 +42,11 @@ public class InnerClassTest2 {
 
 			//通过实例初始化，能够达到为匿名内部类创建一个构造器的效果
 			{
-				System.out.println("Inside instance initializer");
+				PrintUtil.println("Inside instance initializer");
 			}
 
 			@Override public String read() {
-				System.out.println("In anonymous read()");
+				PrintUtil.println("In anonymous read()");
 				return null;
 			}
 
@@ -67,6 +70,6 @@ public class InnerClassTest2 {
 
 abstract class Base implements InnerInterface {
 	public Base(int n) {
-		System.out.println("Base constructor. n = " + n);
+		PrintUtil.println("Base constructor. n = " + n);
 	}
 }
