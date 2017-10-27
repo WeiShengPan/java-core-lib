@@ -1,5 +1,7 @@
 package javafeatures.io.test.preferences;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
@@ -28,7 +30,7 @@ public class PreferencesTest {
 		preferences.putInt("usageCount", usageCount);
 
 		for (String key : preferences.keys()) {
-			System.out.println(key + ": " + preferences.get(key, null));
+			PrintUtil.println(key + ": " + preferences.get(key, null));
 		}
 	}
 }

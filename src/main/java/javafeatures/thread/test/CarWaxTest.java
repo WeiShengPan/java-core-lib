@@ -1,5 +1,7 @@
 package javafeatures.thread.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -90,13 +92,13 @@ class WaxOn implements Runnable {
 	@Override public void run() {
 		try {
 			while (!Thread.interrupted()) {
-				System.out.println("Wax");
+				PrintUtil.println("Wax");
 				TimeUnit.MILLISECONDS.sleep(200);
 				car.wax();
 				car.waitForBuff();
 			}
 		} catch (InterruptedException e) {
-			System.out.println(e);
+			PrintUtil.println(e);
 		}
 	}
 }
@@ -114,12 +116,12 @@ class BuffOn implements Runnable {
 		try {
 			while (!Thread.interrupted()) {
 				car.waitForWax();
-				System.out.println("Buff");
+				PrintUtil.println("Buff");
 				TimeUnit.MILLISECONDS.sleep(200);
 				car.buff();
 			}
 		} catch (InterruptedException e) {
-			System.out.println(e);
+			PrintUtil.println(e);
 		}
 
 	}

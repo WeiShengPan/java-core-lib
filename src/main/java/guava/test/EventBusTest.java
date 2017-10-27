@@ -2,6 +2,7 @@ package guava.test;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+import javafeatures.util.PrintUtil;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -55,17 +56,17 @@ public class EventBusTest {
 
 		@Subscribe public void listener(MessageEvent event) {
 			objMessage = event;
-			System.out.printf("[%s] received obj: %s \n", name, objMessage);
+			PrintUtil.printf("[%s] received obj: %s \n", name, objMessage);
 		}
 
 		@Subscribe public void listenInt(Integer intMsg) {
 			intMessage = intMsg;
-			System.out.printf("[%s] received int: %s \n", name, intMessage);
+			PrintUtil.printf("[%s] received int: %s \n", name, intMessage);
 		}
 
 		@Subscribe public void listenString(String stringMsg) {
 			stringMessage = stringMsg;
-			System.out.printf("[%s] received string: %s \n", name, stringMessage);
+			PrintUtil.printf("[%s] received string: %s \n", name, stringMessage);
 		}
 	}
 

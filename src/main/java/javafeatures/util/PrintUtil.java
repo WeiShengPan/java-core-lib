@@ -24,6 +24,10 @@ public class PrintUtil {
 		System.out.println(prefix + obj);
 	}
 
+	public static void printf(String format, Object... arg) {
+		System.out.printf(format, arg);
+	}
+
 	public static void print(Object obj) {
 		System.out.print(obj);
 	}

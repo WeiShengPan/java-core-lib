@@ -1,5 +1,6 @@
 package commonslang3.test.stopwatch.test;
 
+import javafeatures.util.PrintUtil;
 import org.apache.commons.lang3.time.StopWatch;
 
 /**
@@ -15,13 +16,13 @@ public class StopWatchTest {
 
 		Thread.sleep(1000);
 
-		System.out.println("Start time: " + stopWatch.getStartTime() + " ms");
-		System.out.println("Time: " + stopWatch.getTime() + " ms");
-		System.out.println("Nano time: " + stopWatch.getNanoTime() + " ms");
+		PrintUtil.println("Start time: " + stopWatch.getStartTime() + " ms");
+		PrintUtil.println("Time: " + stopWatch.getTime() + " ms");
+		PrintUtil.println("Nano time: " + stopWatch.getNanoTime() + " ms");
 
 		stopWatch.split();
-		System.out.println("Split nano time: " + stopWatch.getSplitNanoTime() + " ms");
-		System.out.println("Split time: " + stopWatch.getSplitTime() + " ms");
+		PrintUtil.println("Split nano time: " + stopWatch.getSplitNanoTime() + " ms");
+		PrintUtil.println("Split time: " + stopWatch.getSplitTime() + " ms");
 
 		stopWatch.stop();
 	}

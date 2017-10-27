@@ -1,5 +1,7 @@
 package javafeatures.generic.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -39,7 +41,7 @@ public class Store extends ArrayList<Aisle> {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(new Store(2, 2, 5));
+		PrintUtil.println(new Store(2, 2, 5));
 	}
 }
 
@@ -58,7 +60,7 @@ class Product {
 		this.id = id;
 		this.desc = desc;
 		this.price = price;
-		System.out.println(toString());
+		PrintUtil.println(toString());
 	}
 
 	@Override public String toString() {

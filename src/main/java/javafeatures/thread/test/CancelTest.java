@@ -1,5 +1,7 @@
 package javafeatures.thread.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -32,11 +34,11 @@ public class CancelTest {
 
 		//等待每个任务结束，如果所有任务在超时时间达到之前全部结束则返回true，否则返回false，表示不是所有任务都已经结束
 		if (executorService.awaitTermination(250, TimeUnit.MILLISECONDS)) {
-			System.out.println("Some task were not terminated!");
+			PrintUtil.println("Some task were not terminated!");
 		}
 
-		System.out.println("Sum of Counter: " + Entrance.getTotalCount());
-		System.out.println("Sum of All Entrance: " + Entrance.sumEntrances());
+		PrintUtil.println("Sum of Counter: " + Entrance.getTotalCount());
+		PrintUtil.println("Sum of All Entrance: " + Entrance.sumEntrances());
 	}
 }
 
@@ -99,16 +101,16 @@ class Entrance implements Runnable {
 			synchronized (this) {
 				++number;
 			}
-			System.out.println(this + " Total: " + counter.incr());
+			PrintUtil.println(this + " Total: " + counter.incr());
 
 			try {
 				TimeUnit.MILLISECONDS.sleep(100);
 			} catch (InterruptedException e) {
-				System.out.println("sleep interrupted");
+				PrintUtil.println("sleep interrupted");
 			}
 		}
 
-		System.out.println("Stopping " + this);
+		PrintUtil.println("Stopping " + this);
 	}
 
 	public static void cancel() {

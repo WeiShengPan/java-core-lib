@@ -1,5 +1,7 @@
 package javafeatures.thread.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -26,7 +28,7 @@ public class CallableTest {
 		}
 
 		for (Future<Integer> r : result) {
-			System.out.println(r.get());
+			PrintUtil.println(r.get());
 		}
 
 	}

@@ -1,5 +1,7 @@
 package javafeatures.enumeration.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.Random;
 
 /**
@@ -15,7 +17,7 @@ public class RandomEnumTest {
 	public static void main(String[] args) {
 
 		for (int i = 0; i < 7; i++) {
-			System.out.println(random(EnumWeek.class));
+			PrintUtil.println(random(EnumWeek.class));
 		}
 	}
 

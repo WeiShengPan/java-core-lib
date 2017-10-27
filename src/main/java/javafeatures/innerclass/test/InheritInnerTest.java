@@ -1,6 +1,6 @@
 package javafeatures.innerclass.test;
 
-import java.util.ArrayList;
+import javafeatures.util.PrintUtil;
 
 /**
  * 内部类的继承
@@ -14,7 +14,7 @@ public class InheritInnerTest extends WithInner.Inner {
 
 	InheritInnerTest(WithInner withInner) {
 		withInner.super();
-		System.out.println("InheritInner");
+		PrintUtil.println("InheritInner");
 	}
 
 	public static void main(String[] args) {
@@ -27,12 +27,12 @@ public class InheritInnerTest extends WithInner.Inner {
 class WithInner {
 
 	WithInner() {
-		System.out.println("WithInner");
+		PrintUtil.println("WithInner");
 	}
 
 	class Inner {
 		Inner() {
-			System.out.println("Inner");
+			PrintUtil.println("Inner");
 		}
 	}
 

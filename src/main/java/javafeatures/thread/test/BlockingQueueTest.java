@@ -1,5 +1,7 @@
 package javafeatures.thread.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
@@ -18,7 +20,7 @@ public class BlockingQueueTest {
 
 		delayQueue.add(ele1);
 
-		System.out.println(delayQueue.take().getValue());
+		PrintUtil.println(delayQueue.take().getValue());
 
 	}
 

@@ -1,5 +1,7 @@
 package javafeatures.annotation.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.lang.reflect.Method;
 
 /**
@@ -16,25 +18,25 @@ public class TestCaseService {
 
 			if (testCase != null) {
 
-				System.out.println(method + ": " + testCase.id() + ": " + testCase.desc());
+				PrintUtil.println(method + ": " + testCase.id() + ": " + testCase.desc());
 			}
 		}
 	}
 
 	@TestCase(id = 1, desc = "m1") public void m1() {
 
-		System.out.println("m1");
+		PrintUtil.println("m1");
 	}
 
 	public void m2() {
-		System.out.println("m2");
+		PrintUtil.println("m2");
 	}
 
 	@TestCase(desc = "m3") public void m3() {
-		System.out.println("m3");
+		PrintUtil.println("m3");
 	}
 
 	@TestCase(id = 4, desc = "m4") public void m4() {
-		System.out.println("m4");
+		PrintUtil.println("m4");
 	}
 }

@@ -1,5 +1,7 @@
 package javafeatures.thread.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -49,7 +51,7 @@ public class ReadWriteLockTest {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.println("Writer finished, shutting down.");
+			PrintUtil.println("Writer finished, shutting down.");
 			executorService.shutdownNow();
 		}
 	}
@@ -103,7 +105,7 @@ class ReaderWriterList<T> {
 
 		try {
 			if (lock.getReadLockCount() > 1) {
-				System.out.println(lock.getReadLockCount());
+				PrintUtil.println(lock.getReadLockCount());
 			}
 			return lockedList.get(index);
 		} finally {

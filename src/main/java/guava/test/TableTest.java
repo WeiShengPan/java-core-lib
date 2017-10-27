@@ -2,6 +2,7 @@ package guava.test;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import javafeatures.util.PrintUtil;
 
 /**
  * Table支持row和column,提供多种视图，支持替代Map<key, Map<key, value>>
@@ -19,11 +20,11 @@ public class TableTest {
 		table1.put("Pan", "Xiaoxiang", "PanXiaoxiang");
 		table1.put("Huang", "Xiaomin", "HuangXiaomin");
 
-		System.out.println(table1.row("Pan"));
-		System.out.println(table1.row("Huang"));
-		System.out.println(table1.column("Weisheng"));
-		System.out.println(table1.rowMap());
-		System.out.println(table1.columnMap());
+		PrintUtil.println(table1.row("Pan"));
+		PrintUtil.println(table1.row("Huang"));
+		PrintUtil.println(table1.column("Weisheng"));
+		PrintUtil.println(table1.rowMap());
+		PrintUtil.println(table1.columnMap());
 
 
 	}

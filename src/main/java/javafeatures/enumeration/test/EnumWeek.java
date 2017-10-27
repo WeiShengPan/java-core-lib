@@ -1,5 +1,6 @@
 package javafeatures.enumeration.test;
 
+import javafeatures.util.PrintUtil;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.lang.reflect.Method;
@@ -18,41 +19,41 @@ public enum EnumWeek {
 	//周一
 	MON(1) {
 		@Override public void abstractJob() {
-			System.out.println("Do home work.");
+			PrintUtil.println("Do home work.");
 		}
 
 		@Override public void normalJob() {
-			System.out.println("Customized job.");
+			PrintUtil.println("Customized job.");
 		}
 	}, //周二
 	TUE(2) {
 		@Override public void abstractJob() {
-			System.out.println("Do some cleaning.");
+			PrintUtil.println("Do some cleaning.");
 		}
 	},  //周三
 	WED(3) {
 		@Override public void abstractJob() {
-			System.out.println("Play games.");
+			PrintUtil.println("Play games.");
 		}
 	},    //周四
 	THU(4) {
 		@Override public void abstractJob() {
-			System.out.println("Listen music.");
+			PrintUtil.println("Listen music.");
 		}
 	},     //周五
 	FRI(5) {
 		@Override public void abstractJob() {
-			System.out.println("Do exercises.");
+			PrintUtil.println("Do exercises.");
 		}
 	},     //周六
 	SAT(6) {
 		@Override public void abstractJob() {
-			System.out.println("Go dating.");
+			PrintUtil.println("Go dating.");
 		}
 	},    //周日
 	SUN(7) {
 		@Override public void abstractJob() {
-			System.out.println("Go sleeping.");
+			PrintUtil.println("Go sleeping.");
 		}
 	};
 
@@ -96,7 +97,7 @@ public enum EnumWeek {
 	 * 每个枚举示例可以选择实现该方法，实现不同的业务逻辑，没有实现的示例将调用该默认方法
 	 */
 	public void normalJob() {
-		System.out.println("Normal job.");
+		PrintUtil.println("Normal job.");
 	}
 
 	@Override public String toString() {
@@ -107,7 +108,7 @@ public enum EnumWeek {
 
 	public static void main(String[] args) {
 		for (EnumWeek ew : EnumWeek.values()) {
-			System.out.println(ew);
+			PrintUtil.println(ew);
 			ew.abstractJob();
 			ew.normalJob();
 		}
@@ -115,28 +116,28 @@ public enum EnumWeek {
 		/**
 		 * 使用反射查看enum的详细
 		 */
-		System.out.println("*****Reflection*****");
+		PrintUtil.println("*****Reflection*****");
 		Set<String> m1 = analyze(EnumWeek.class);
 		Set<String> m2 = analyze(Enum.class);
 		m1.removeAll(m2);
-		System.out.println(m1);
-		System.out.println("*****Finish Reflection*****");
+		PrintUtil.println(m1);
+		PrintUtil.println("*****Finish Reflection*****");
 
 	}
 
 	public static Set<String> analyze(Class<?> enumClass) {
 
-		System.out.println("-----analyze " + enumClass + "-----");
+		PrintUtil.println("-----analyze " + enumClass + "-----");
 
-		System.out.println("Interfaces: ");
+		PrintUtil.println("Interfaces: ");
 
 		for (Type t : enumClass.getGenericInterfaces()) {
-			System.out.print("[" + t + "]");
+			PrintUtil.print("[" + t + "]");
 		}
 
-		System.out.println();
+		PrintUtil.println();
 
-		System.out.println("Super class: " + enumClass.getSuperclass());
+		PrintUtil.println("Super class: " + enumClass.getSuperclass());
 
 		Set<String> methods = new TreeSet<>();
 
@@ -145,7 +146,7 @@ public enum EnumWeek {
 			methods.add(m.getName());
 		}
 
-		System.out.println("Methods: " + methods);
+		PrintUtil.println("Methods: " + methods);
 
 		return methods;
 	}

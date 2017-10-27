@@ -1,5 +1,7 @@
 package javafeatures.thread.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
@@ -33,7 +35,7 @@ public class AtomTest {
 		while (true) {
 			int val = atomInt.getValue();
 			if (val % 2 != 0) {
-				System.out.println(val);
+				PrintUtil.println(val);
 				System.exit(0);
 			}
 		}

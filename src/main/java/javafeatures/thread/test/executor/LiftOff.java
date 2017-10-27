@@ -1,5 +1,7 @@
 package javafeatures.thread.test.executor;
 
+import javafeatures.util.PrintUtil;
+
 /**
  * @author panws
  * @since 2017-08-21
@@ -15,7 +17,7 @@ public class LiftOff implements Runnable {
 	@Override public void run() {
 
 		while (countDown-- > 0) {
-			System.out.println(status());
+			PrintUtil.println(status());
 			Thread.yield();
 		}
 

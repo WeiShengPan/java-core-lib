@@ -1,5 +1,7 @@
 package javafeatures.typeinfo.test;
 
+import javafeatures.util.PrintUtil;
+
 /**
  * @author panws
  * @since 2017-09-26
@@ -13,7 +15,7 @@ public class ToyTest {
 		try {
 			clazz = Class.forName("javafeatures.typeinfo.test.FancyToy");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Can't find FancyToy");
+			PrintUtil.println("Can't find FancyToy");
 			System.exit(1);
 		}
 
@@ -28,10 +30,10 @@ public class ToyTest {
 		try {
 			obj = up.newInstance();
 		} catch (IllegalAccessException e) {
-			System.out.println("Can't access");
+			PrintUtil.println("Can't access");
 			System.exit(1);
 		} catch (InstantiationException e) {
-			System.out.println("Can't instantiate");
+			PrintUtil.println("Can't instantiate");
 			System.exit(1);
 		}
 		printInfo(obj.getClass());
@@ -39,9 +41,9 @@ public class ToyTest {
 	}
 
 	static void printInfo(Class clazz) {
-		System.out.println("Class name: " + clazz.getName() + " is interface? [" + clazz.isInterface() + "]");
-		System.out.println("Simple name: " + clazz.getSimpleName());
-		System.out.println("Canonical name: " + clazz.getCanonicalName());
+		PrintUtil.println("Class name: " + clazz.getName() + " is interface? [" + clazz.isInterface() + "]");
+		PrintUtil.println("Simple name: " + clazz.getSimpleName());
+		PrintUtil.println("Canonical name: " + clazz.getCanonicalName());
 	}
 }
 

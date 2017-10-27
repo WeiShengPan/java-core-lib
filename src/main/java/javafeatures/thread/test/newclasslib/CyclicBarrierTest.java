@@ -1,5 +1,7 @@
 package javafeatures.thread.test.newclasslib;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -89,15 +91,15 @@ class HorseRace {
 				for (int i = 0; i < FINISH_LINE; i++) {
 					s.append("=");
 				}
-				System.out.println(s);
+				PrintUtil.println(s);
 
 				for (Horse horse : horseList) {
-					System.out.println(horse.tracks());
+					PrintUtil.println(horse.tracks());
 				}
 
 				for (Horse horse : horseList) {
 					if (horse.getStrides() >= FINISH_LINE) {
-						System.out.println(horse + " won!");
+						PrintUtil.println(horse + " won!");
 						executorService.shutdownNow();
 						return;
 					}

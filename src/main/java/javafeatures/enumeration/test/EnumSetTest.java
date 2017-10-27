@@ -1,5 +1,7 @@
 package javafeatures.enumeration.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.EnumSet;
 
 /**
@@ -11,28 +13,28 @@ public class EnumSetTest {
 	public static void main(String[] args) {
 
 		EnumSet<EnumWeek> weekEnumSet = EnumSet.noneOf(EnumWeek.class);
-		System.out.println(weekEnumSet);
+		PrintUtil.println(weekEnumSet);
 
 		weekEnumSet.add(EnumWeek.MON);
-		System.out.println(weekEnumSet);
+		PrintUtil.println(weekEnumSet);
 
 		weekEnumSet.addAll(EnumSet.allOf(EnumWeek.class));
-		System.out.println(weekEnumSet);
+		PrintUtil.println(weekEnumSet);
 
 		weekEnumSet.removeAll(EnumSet.of(EnumWeek.TUE, EnumWeek.WED));
-		System.out.println(weekEnumSet);
+		PrintUtil.println(weekEnumSet);
 
 		weekEnumSet.removeAll(EnumSet.range(EnumWeek.FRI, EnumWeek.SUN));
-		System.out.println(weekEnumSet);
+		PrintUtil.println(weekEnumSet);
 
 		weekEnumSet = EnumSet.allOf(EnumWeek.class);
-		System.out.println(weekEnumSet);
+		PrintUtil.println(weekEnumSet);
 
 		weekEnumSet.remove(EnumWeek.MON);
-		System.out.println(weekEnumSet);
+		PrintUtil.println(weekEnumSet);
 
-		System.out.println(weekEnumSet.contains(EnumWeek.MON));
-		System.out.println(weekEnumSet.contains(EnumWeek.TUE));
+		PrintUtil.println(weekEnumSet.contains(EnumWeek.MON));
+		PrintUtil.println(weekEnumSet.contains(EnumWeek.TUE));
 
 	}
 }

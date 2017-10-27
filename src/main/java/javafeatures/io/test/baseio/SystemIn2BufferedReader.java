@@ -1,5 +1,7 @@
 package javafeatures.io.test.baseio;
 
+import javafeatures.util.PrintUtil;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,7 +21,7 @@ public class SystemIn2BufferedReader {
 		String s;
 
 		while ((s = in.readLine()) != null && s.length() != 0) {
-			System.out.println("echo : " + s);
+			PrintUtil.println("echo : " + s);
 		}
 
 	}

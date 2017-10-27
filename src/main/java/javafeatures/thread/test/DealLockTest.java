@@ -1,5 +1,7 @@
 package javafeatures.thread.test;
 
+import javafeatures.util.PrintUtil;
+
 /**
  * 死锁
  *
@@ -36,18 +38,18 @@ class ThreadA extends Thread {
 
 	@Override public void run() {
 		synchronized (lockA) {
-			System.out.println(this.getClass().getName() + " holds lockA.");
+			PrintUtil.println(this.getClass().getName() + " holds lockA.");
 			try {
 				sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			synchronized (lockB) {
-				System.out.println(this.getClass().getName() + " holds lockB.");
+				PrintUtil.println(this.getClass().getName() + " holds lockB.");
 			}
-			System.out.println(this.getClass().getName() + " releases lockB.");
+			PrintUtil.println(this.getClass().getName() + " releases lockB.");
 		}
-		System.out.println(this.getClass().getName() + " releases lockA.");
+		PrintUtil.println(this.getClass().getName() + " releases lockA.");
 	}
 }
 
@@ -64,17 +66,17 @@ class ThreadB extends Thread {
 
 	@Override public void run() {
 		synchronized (lockB) {
-			System.out.println(this.getClass().getName() + " holds lockB.");
+			PrintUtil.println(this.getClass().getName() + " holds lockB.");
 			try {
 				sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			synchronized (lockA) {
-				System.out.println(this.getClass().getName() + " holds lockA.");
+				PrintUtil.println(this.getClass().getName() + " holds lockA.");
 			}
-			System.out.println(this.getClass().getName() + " releases lockA.");
+			PrintUtil.println(this.getClass().getName() + " releases lockA.");
 		}
-		System.out.println(this.getClass().getName() + " releases lockB.");
+		PrintUtil.println(this.getClass().getName() + " releases lockB.");
 	}
 }

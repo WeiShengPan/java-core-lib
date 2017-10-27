@@ -3,6 +3,7 @@ package guava.test;
 import com.google.common.collect.Range;
 import com.google.common.collect.RangeMap;
 import com.google.common.collect.TreeRangeMap;
+import javafeatures.util.PrintUtil;
 
 import java.util.Map;
 
@@ -18,13 +19,13 @@ public class RangeMapTest {
 
 		RangeMap<Integer, String> rangeMap = TreeRangeMap.create();
 		rangeMap.put(Range.closed(1, 10), "foo");
-		System.out.println("rangeMap:" + rangeMap);
+		PrintUtil.println("rangeMap:" + rangeMap);
 		rangeMap.put(Range.open(3, 6), "bar");
-		System.out.println("rangeMap:" + rangeMap);
+		PrintUtil.println("rangeMap:" + rangeMap);
 		rangeMap.put(Range.open(10, 20), "foo");
-		System.out.println("rangeMap:" + rangeMap);
+		PrintUtil.println("rangeMap:" + rangeMap);
 		rangeMap.remove(Range.closed(5, 11));
-		System.out.println("rangeMap:" + rangeMap);
+		PrintUtil.println("rangeMap:" + rangeMap);
 
 		/**
 		 * RangeMap提供了两种视图：
@@ -32,11 +33,11 @@ public class RangeMapTest {
 		 *　　subRangeMap(Range<K>)提供给定Range的交集。这个操作可以推广到传统的headMap, subMap, 和tailMap。
 		 */
 		for (Map.Entry<Range<Integer>, String> entry : rangeMap.asMapOfRanges().entrySet()) {
-			System.out.println(entry);
+			PrintUtil.println(entry);
 		}
 
-		System.out.println(rangeMap.subRangeMap(Range.closed(12,14)));
-		System.out.println(rangeMap.subRangeMap(Range.closed(7,14)));
-		System.out.println(rangeMap.subRangeMap(Range.closed(4,14)));
+		PrintUtil.println(rangeMap.subRangeMap(Range.closed(12,14)));
+		PrintUtil.println(rangeMap.subRangeMap(Range.closed(7,14)));
+		PrintUtil.println(rangeMap.subRangeMap(Range.closed(4,14)));
 	}
 }

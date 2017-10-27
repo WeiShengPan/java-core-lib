@@ -1,5 +1,7 @@
 package javafeatures.thread.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -21,7 +23,7 @@ public class DaemonTest {
 			executorService.execute(new DaemonThread());
 		}
 
-		System.out.println("All daemon started.");
+		PrintUtil.println("All daemon started.");
 
 		//将主线程休眠一小段时间的意义在于可观察后台线程的执行情况。
 		//当主线程结束时，所有非后台线程就都结束了，同时会杀死所有的后台线程。
@@ -48,7 +50,7 @@ class DaemonThread implements Runnable {
 		try {
 			while (true) {
 				TimeUnit.MILLISECONDS.sleep(100);
-				System.out.println(Thread.currentThread() + " " + this);
+				PrintUtil.println(Thread.currentThread() + " " + this);
 			}
 		} catch (InterruptedException e) {
 			System.err.println("Interrupted.");

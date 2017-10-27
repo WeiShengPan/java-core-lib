@@ -1,5 +1,7 @@
 package javafeatures.enumeration.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -17,7 +19,7 @@ public class EnumMapTest {
 		weekEnumMap.put(EnumWeek.SUN, EnumWeek.SUN.getOrder());
 
 		for (Map.Entry entry : weekEnumMap.entrySet()) {
-			System.out.println(entry.getKey() + ": " + entry.getValue());
+			PrintUtil.println(entry.getKey() + ": " + entry.getValue());
 		}
 
 	}

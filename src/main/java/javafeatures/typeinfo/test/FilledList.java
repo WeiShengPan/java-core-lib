@@ -1,5 +1,7 @@
 package javafeatures.typeinfo.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +36,7 @@ public class FilledList<T> {
 
 		FilledList<CountedInteger> list = new FilledList<>(CountedInteger.class);
 
-		System.out.println(list.create(10));
+		PrintUtil.println(list.create(10));
 	}
 }
 

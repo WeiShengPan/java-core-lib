@@ -1,5 +1,7 @@
 package javafeatures.generic.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.*;
 
 /**
@@ -19,7 +21,7 @@ public class AnonymousGenericTest {
 		Generators.fill(tellers, Teller.generator(), 4);
 
 		for (Customer c : line) {
-			System.out.println(tellers.get(random.nextInt(tellers.size())) + " serves " + c);
+			PrintUtil.println(tellers.get(random.nextInt(tellers.size())) + " serves " + c);
 		}
 	}
 

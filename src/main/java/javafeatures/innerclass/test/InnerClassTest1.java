@@ -1,5 +1,7 @@
 package javafeatures.innerclass.test;
 
+import javafeatures.util.PrintUtil;
+
 /**
  * 定义在方法中的内部类
  *
@@ -67,7 +69,7 @@ public class InnerClassTest1 {
 
 		InnerInterface inner = instance.getInner("hello world");
 
-		System.out.println(inner.read());
+		PrintUtil.println(inner.read());
 
 	}
 

@@ -2,6 +2,7 @@ package guava.test;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.HashMultiset;
+import javafeatures.util.PrintUtil;
 
 /**
  * Multimap: 在 Map 的 value 里面放多个元素,Map : {k1=v1, k2=v2,...} Muitimap : {k1=[v1, v2, v3], k2=[v7, v8],....}
@@ -28,7 +29,7 @@ public class MultiMapTest {
 		hashMultimap1.put("President", "John");
 		hashMultimap1.put("President", "Tom");
 		hashMultimap1.put("Vice President", "Tom");
-		System.out.println(hashMultimap1);
+		PrintUtil.println(hashMultimap1);
 
 		HashMultiset<String> hashMultiset1 = HashMultiset.create();
 		hashMultiset1.add("Tom");
@@ -47,6 +48,6 @@ public class MultiMapTest {
 		HashMultimap<String, HashMultiset<String>> hashMultimap2 = HashMultimap.create();
 		hashMultimap2.put("President", hashMultiset1);
 		hashMultimap2.put("President", hashMultiset2);
-		System.out.println(hashMultimap2);
+		PrintUtil.println(hashMultimap2);
 	}
 }

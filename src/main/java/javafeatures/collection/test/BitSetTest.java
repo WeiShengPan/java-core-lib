@@ -1,5 +1,7 @@
 package javafeatures.collection.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.util.BitSet;
 import java.util.Random;
 
@@ -30,7 +32,7 @@ public class BitSetTest {
 				bb.clear(i);
 			}
 		}
-		System.out.println("byte value: " + bt);
+		PrintUtil.println("byte value: " + bt);
 		printBitSet(bb);
 
 
@@ -46,7 +48,7 @@ public class BitSetTest {
 				bs.clear(i);
 			}
 		}
-		System.out.println("short value: " + st);
+		PrintUtil.println("short value: " + st);
 		printBitSet(bs);
 
 
@@ -62,7 +64,7 @@ public class BitSetTest {
 				bi.clear(i);
 			}
 		}
-		System.out.println("int value: " + it);
+		PrintUtil.println("int value: " + it);
 		printBitSet(bi);
 
 
@@ -71,21 +73,21 @@ public class BitSetTest {
 		 */
 		BitSet b127 = new BitSet();
 		b127.set(127);
-		System.out.println("set bit 127: " + b127);
+		PrintUtil.println("set bit 127: " + b127);
 
 		BitSet b255 = new BitSet(65);
 		b255.set(255);
-		System.out.println("set bit 255: " + b255);
+		PrintUtil.println("set bit 255: " + b255);
 
 		BitSet b1023 = new BitSet(512);
 		b1023.set(1023);
 		b1023.set(1024);
-		System.out.println("set bit 1023: " + b1023);
+		PrintUtil.println("set bit 1023: " + b1023);
 	}
 
 	private static void printBitSet(BitSet bitSet) {
 
-		System.out.println(bitSet);
+		PrintUtil.println(bitSet);
 
 		StringBuilder stringBuilder = new StringBuilder();
 
@@ -93,6 +95,6 @@ public class BitSetTest {
 			stringBuilder.append(bitSet.get(j) ? "1" : "0");
 		}
 
-		System.out.println("bit pattern: " + stringBuilder);
+		PrintUtil.println("bit pattern: " + stringBuilder);
 	}
 }

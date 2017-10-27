@@ -1,5 +1,7 @@
 package javafeatures.collection.test;
 
+import javafeatures.util.PrintUtil;
+
 /**
  * 非常简单的map的关联数据的实现，有助于理解map
  *
@@ -63,10 +65,10 @@ public class AssociativeArray<K, V> {
 		try {
 			map.put("extra", "object");
 		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println("Too much objects");
+			PrintUtil.println("Too much objects");
 		}
 
-		System.out.println(map);
-		System.out.println(map.get("ocean"));
+		PrintUtil.println(map);
+		PrintUtil.println(map.get("ocean"));
 	}
 }

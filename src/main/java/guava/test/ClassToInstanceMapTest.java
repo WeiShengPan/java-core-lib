@@ -2,6 +2,7 @@ package guava.test;
 
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.MutableClassToInstanceMap;
+import javafeatures.util.PrintUtil;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -25,7 +26,7 @@ public class ClassToInstanceMapTest {
 		numberMap.put(BigInteger.class, BigInteger.ZERO);
 		numberMap.put(BigInteger.class, BigInteger.ONE);
 
-		System.out.println(numberMap);
-		System.out.println(numberMap.getInstance(Integer.class));
+		PrintUtil.println(numberMap);
+		PrintUtil.println(numberMap.getInstance(Integer.class));
 	}
 }

@@ -1,5 +1,7 @@
 package javafeatures.io.test.baseio;
 
+import javafeatures.util.PrintUtil;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -23,7 +25,7 @@ public class MemoryInputTest {
 			int c;
 
 			while ((c = in.read()) != -1) {
-				System.out.println((char) c);
+				PrintUtil.println((char) c);
 			}
 
 		}
@@ -35,7 +37,7 @@ public class MemoryInputTest {
 				new ByteArrayInputStream(BufferReaderTest.read("src/main/resources/io/input1.txt").getBytes()))) {
 
 			while (dataInputStream.available() != 0) {
-				System.out.print((char) dataInputStream.readByte());
+				PrintUtil.print((char) dataInputStream.readByte());
 			}
 
 		}

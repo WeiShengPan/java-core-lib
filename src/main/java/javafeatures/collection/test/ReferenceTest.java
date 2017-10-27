@@ -1,5 +1,7 @@
 package javafeatures.collection.test;
 
+import javafeatures.util.PrintUtil;
+
 import java.lang.ref.*;
 import java.util.LinkedList;
 
@@ -16,7 +18,7 @@ public class ReferenceTest {
 		Reference<? extends VeryBig> inq = rq.poll();
 
 		if (inq != null) {
-			System.out.println("In queue: " + inq.get());
+			PrintUtil.println("In queue: " + inq.get());
 		}
 	}
 
@@ -26,14 +28,14 @@ public class ReferenceTest {
 		LinkedList<SoftReference<VeryBig>> sa = new LinkedList<>();
 		for (int i = 0; i < size; i++) {
 			sa.add(new SoftReference<>(new VeryBig("Soft " + i), rq));
-			System.out.println("Just created: " + sa.getLast());
+			PrintUtil.println("Just created: " + sa.getLast());
 			checkQueue();
 		}
 
 		LinkedList<WeakReference<VeryBig>> wa = new LinkedList<>();
 		for (int i = 0; i < size; i++) {
 			wa.add(new WeakReference<>(new VeryBig("Weak " + i), rq));
-			System.out.println("Just created: " + wa.getLast());
+			PrintUtil.println("Just created: " + wa.getLast());
 			checkQueue();
 		}
 
@@ -45,7 +47,7 @@ public class ReferenceTest {
 		LinkedList<PhantomReference<VeryBig>> pa = new LinkedList<>();
 		for (int i = 0; i < size; i++) {
 			pa.add(new PhantomReference<>(new VeryBig("Phantom " + i), rq));
-			System.out.println("Just created: " + pa.getLast());
+			PrintUtil.println("Just created: " + pa.getLast());
 			checkQueue();
 		}
 	}
@@ -67,6 +69,6 @@ class VeryBig {
 	}
 
 	@Override protected void finalize() throws Throwable {
-		System.out.println("Finalizing " + id);
+		PrintUtil.println("Finalizing " + id);
 	}
 }

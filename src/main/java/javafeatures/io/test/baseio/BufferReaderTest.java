@@ -1,5 +1,7 @@
 package javafeatures.io.test.baseio;
 
+import javafeatures.util.PrintUtil;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,7 +16,7 @@ public class BufferReaderTest {
 
 	public static void main(String[] args) throws IOException {
 
-		System.out.println(BufferReaderTest.read("src/main/resources/io/input1.txt"));
+		PrintUtil.println(BufferReaderTest.read("src/main/resources/io/input1.txt"));
 
 	}
 

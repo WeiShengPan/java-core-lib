@@ -4,6 +4,7 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Ordering;
+import javafeatures.util.PrintUtil;
 
 /**
  * 在Java中Object类是所有类的父类，其中有几个需要override的方法比如equals,hashCode和toString等方法。
@@ -28,14 +29,14 @@ public class ObjectsTest {
 		 * 4. 一致性consistent：两个非空引用x和y，x.equals(y)的多次调用应该保持一致的结果，（前提条件是在多次比较之间没有修改x和y用于比较的相关信息）；
 		 * 5. 对于所有非null的值x， x.equals(null)都要返回false。 (如果你要用null.equals(x)也可以，会报NullPointerException)。
 		 */
-		System.out.println("***equals***");
-		System.out.println(Objects.equal("a", "b"));
-		System.out.println(Objects.equal("a", "a"));
-		System.out.println(Objects.equal("a", null));
-		System.out.println(Objects.equal(null, "b"));
-		System.out.println(Objects.equal(new Person("peida", 23), new Person("peida", 23)));
+		PrintUtil.println("***equals***");
+		PrintUtil.println(Objects.equal("a", "b"));
+		PrintUtil.println(Objects.equal("a", "a"));
+		PrintUtil.println(Objects.equal("a", null));
+		PrintUtil.println(Objects.equal(null, "b"));
+		PrintUtil.println(Objects.equal(new Person("peida", 23), new Person("peida", 23)));
 		Person person = new Person("peida", 23);
-		System.out.println(Objects.equal(person, person));
+		PrintUtil.println(Objects.equal(person, person));
 
 		/**
 		 * hashCode方法
@@ -47,39 +48,39 @@ public class ObjectsTest {
 		 * 2.如果equals()判断两个对象相等，那么它们的hashCode()方法应该返回同样的值。
 		 * 3.并没有强制要求如果equals()判断两个对象不相等，那么它们的hashCode()方法就应该返回不同的值。即，两个对象用equals()方法比较返回false，它们的hashCode可以相同也可以不同。但是，应该意识到，为两个不相等的对象产生两个不同的hashCode可以改善哈希表的性能。
 		 */
-		System.out.println("***hashCode***");
-		System.out.println(Objects.hashCode("a"));
-		System.out.println(Objects.hashCode("a"));
-		System.out.println(Objects.hashCode("a", "b"));
-		System.out.println(Objects.hashCode("b", "a"));
-		System.out.println(Objects.hashCode("a", "b", "c"));
+		PrintUtil.println("***hashCode***");
+		PrintUtil.println(Objects.hashCode("a"));
+		PrintUtil.println(Objects.hashCode("a"));
+		PrintUtil.println(Objects.hashCode("a", "b"));
+		PrintUtil.println(Objects.hashCode("b", "a"));
+		PrintUtil.println(Objects.hashCode("a", "b", "c"));
 		Person person1 = new Person("peida", 23);
-		System.out.println(Objects.hashCode(person1));
-		System.out.println(Objects.hashCode(person1));
+		PrintUtil.println(Objects.hashCode(person1));
+		PrintUtil.println(Objects.hashCode(person1));
 
 		/**
 		 * toString方法
 		 */
-		System.out.println("***toString***");
-		System.out.println(MoreObjects.toStringHelper(Person.class).add("x", 1).toString());
+		PrintUtil.println("***toString***");
+		PrintUtil.println(MoreObjects.toStringHelper(Person.class).add("x", 1).toString());
 		Person person2 = new Person("peida", 23);
 		String result = MoreObjects.toStringHelper(Person.class).add("name", person2.name).add("age", person2.age)
 				.toString();
-		System.out.println(result);
+		PrintUtil.println(result);
 
 		/**
 		 * compareTo方法
 		 */
-		System.out.println("***compareTo***");
+		PrintUtil.println("***compareTo***");
 		Person person3 = new Person("chen", 23);
 		Person person4 = new Person("chen", 24);
 		Person person5 = new Person("wang", 24);
-		System.out.println(person3.compareTo(person4));
-		System.out.println(person4.compareTo(person3));
-		System.out.println(person3.compareTo(person5));
-		System.out.println(person5.compareTo(person3));
-		System.out.println(person4.compareTo(person5));
-		System.out.println(person5.compareTo(person4));
+		PrintUtil.println(person3.compareTo(person4));
+		PrintUtil.println(person4.compareTo(person3));
+		PrintUtil.println(person3.compareTo(person5));
+		PrintUtil.println(person5.compareTo(person3));
+		PrintUtil.println(person4.compareTo(person5));
+		PrintUtil.println(person5.compareTo(person4));
 
 	}
 

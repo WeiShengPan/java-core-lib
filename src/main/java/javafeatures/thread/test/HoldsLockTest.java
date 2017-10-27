@@ -1,5 +1,7 @@
 package javafeatures.thread.test;
 
+import javafeatures.util.PrintUtil;
+
 /**
  * Thread.holdsLock(Object obj)
  * Returns true if and only if the current thread holds the
@@ -16,13 +18,13 @@ public class HoldsLockTest {
 
 		MyThread myThread = new MyThread(locker);
 
-		System.out.println(Thread.currentThread().getName() + " holds lock:" + Thread.holdsLock(locker));
+		PrintUtil.println(Thread.currentThread().getName() + " holds lock:" + Thread.holdsLock(locker));
 
 		myThread.start();
 
 		myThread.join();
 
-		System.out.println(Thread.currentThread().getName() + " holds lock:" + Thread.holdsLock(locker));
+		PrintUtil.println(Thread.currentThread().getName() + " holds lock:" + Thread.holdsLock(locker));
 
 	}
 
@@ -37,16 +39,16 @@ class MyThread extends Thread {
 	}
 
 	@Override public void run() {
-		System.out.println(Thread.currentThread().getName() + " holds lock:" + Thread.holdsLock(locker));
+		PrintUtil.println(Thread.currentThread().getName() + " holds lock:" + Thread.holdsLock(locker));
 		synchronized (locker) {
 			try {
-				System.out.println(Thread.currentThread().getName() + " holds lock:" + Thread.holdsLock(locker));
+				PrintUtil.println(Thread.currentThread().getName() + " holds lock:" + Thread.holdsLock(locker));
 				sleep(5000);
-				System.out.println(Thread.currentThread().getName() + " holds lock:" + Thread.holdsLock(locker));
+				PrintUtil.println(Thread.currentThread().getName() + " holds lock:" + Thread.holdsLock(locker));
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(Thread.currentThread().getName() + " holds lock:" + Thread.holdsLock(locker));
+		PrintUtil.println(Thread.currentThread().getName() + " holds lock:" + Thread.holdsLock(locker));
 	}
 }

@@ -1,7 +1,8 @@
 package javafeatures.io.test.nio;
 
+import javafeatures.util.PrintUtil;
+
 import java.nio.charset.Charset;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.SortedMap;
 
@@ -17,14 +18,14 @@ public class AvailableCharsets {
 
 		for (Map.Entry charsetsEntry : charsets.entrySet()) {
 
-			System.out.print(charsetsEntry.getKey() + ": ");
+			PrintUtil.print(charsetsEntry.getKey() + ": ");
 
 			for (String alias : ((Charset) charsetsEntry.getValue()).aliases()) {
 
-				System.out.print("[" + alias + "]");
+				PrintUtil.print("[" + alias + "]");
 			}
 
-			System.out.print("\n");
+			PrintUtil.print("\n");
 		}
 
 		//		Iterator<String> keyIt = charsets.keySet().iterator();
@@ -33,21 +34,21 @@ public class AvailableCharsets {
 		//
 		//			String csName = keyIt.next();
 		//
-		//			System.out.print(csName);
+		//			PrintUtil.print(csName);
 		//
 		//			Iterator aliasesIt = charsets.get(csName).aliases().iterator();
 		//
 		//			if (aliasesIt.hasNext()) {
-		//				System.out.print(": ");
+		//				PrintUtil.print(": ");
 		//			}
 		//			while (aliasesIt.hasNext()) {
-		//				System.out.print(aliasesIt.next());
+		//				PrintUtil.print(aliasesIt.next());
 		//				if (aliasesIt.hasNext()) {
-		//					System.out.print(", ");
+		//					PrintUtil.print(", ");
 		//				}
 		//			}
 		//
-		//			System.out.print("\n");
+		//			PrintUtil.print("\n");
 		//
 		//		}
 

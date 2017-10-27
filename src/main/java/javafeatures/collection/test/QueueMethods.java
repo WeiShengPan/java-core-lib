@@ -1,6 +1,6 @@
 package javafeatures.collection.test;
 
-import sun.nio.cs.Surrogate;
+import javafeatures.util.PrintUtil;
 
 import java.util.LinkedList;
 import java.util.PriorityQueue;
@@ -25,9 +25,9 @@ public class QueueMethods {
 		}
 
 		while (queue.peek() != null) {
-			System.out.print(queue.remove() + " ");
+			PrintUtil.print(queue.remove() + " ");
 		}
-		System.out.println();
+		PrintUtil.println();
 	}
 
 	static class Gen {

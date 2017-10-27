@@ -1,5 +1,7 @@
 package javafeatures.io.test.baseio;
 
+import javafeatures.util.PrintUtil;
+
 import java.io.*;
 
 /**
@@ -24,10 +26,10 @@ public class StoringAndRecoveringTest {
 		try (DataInputStream in = new DataInputStream(
 				new BufferedInputStream(new FileInputStream("src/main/resources/io/output2.txt")))) {
 
-			System.out.println(in.readDouble());
-			System.out.println(in.readUTF());
-			System.out.println(in.readBoolean());
-			System.out.println(in.read());
+			PrintUtil.println(in.readDouble());
+			PrintUtil.println(in.readUTF());
+			PrintUtil.println(in.readBoolean());
+			PrintUtil.println(in.read());
 		}
 
 	}
