@@ -20,6 +20,11 @@ public class TestCaseService {
 
 				PrintUtil.println(method + ": " + testCase.id() + ": " + testCase.desc());
 			}
+
+			if (method.isAnnotationPresent(TestCase.class)) {
+
+				PrintUtil.println("#" + method + ": " + testCase.id() + ": " + testCase.desc());
+			}
 		}
 	}
 
