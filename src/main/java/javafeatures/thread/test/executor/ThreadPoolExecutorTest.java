@@ -1,13 +1,20 @@
 package javafeatures.thread.test.executor;
 
-import javafeatures.util.PrintUtil;
-
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import javafeatures.util.PrintUtil;
+
 /**
+ * 运行机制上，简单来说：
+ * <p>
+ * 1. 当一个任务提交，如果线程池中的线程 < corePoolSize，则创建一个新线程；
+ * 2. 当一个任务提交，如果线程池中的线程 >= corePoolSize，且workQueue未满，则将任务加入workQueue中排队，不创建新线程；
+ * 3. 当一个任务提交，如果线程池中的线程 >= corePoolSize，且workQueue已满，且线程池中的线程< maximumPoolSize，则创建新线程；
+ * 4. 当一个任务提交，如果线程池中的线程 = maximumPoolSize，且workQueue已满，则拒绝该任务，将任务交给RejectedExecutionHandler处理。
+ *
  * @author panws
  * @since 2017-11-03
  */
@@ -37,7 +44,8 @@ public class ThreadPoolExecutorTest {
 
 class CustomRejectExecutionHandler implements RejectedExecutionHandler {
 
-	@Override public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+	@Override
+	public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
 		PrintUtil.println(r + " is rejected !");
 	}
 }
@@ -50,7 +58,8 @@ class Worker implements Runnable {
 		this.num = num;
 	}
 
-	@Override public void run() {
+	@Override
+	public void run() {
 		PrintUtil.println("Worker :" + num);
 		try {
 			Thread.sleep(2000);
@@ -59,7 +68,8 @@ class Worker implements Runnable {
 		}
 	}
 
-	@Override public String toString() {
+	@Override
+	public String toString() {
 		return "Worker{" + "num=" + num + '}';
 	}
 }
