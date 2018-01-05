@@ -1,9 +1,10 @@
 package javafeatures.io.test.serialization;
 
-import javafeatures.util.PrintUtil;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import java.io.*;
+
+import javafeatures.util.PrintUtil;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * @author panws
@@ -44,7 +45,12 @@ public class ExternalizableTest {
 
 	static class ExternalizedObject implements Externalizable {
 
-		private int i;
+		/**
+		 * 当序列化实现的是Externalizable，序列化和反序列化都是手动通过writeExternal和
+		 * readExternal指定的，不判断变量是否有transient；这里虽然声明i为transient，但
+		 * 序列化和反序列化时都仍有这个域变量
+		 */
+		private transient int i;
 
 		private String s;
 

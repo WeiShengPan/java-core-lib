@@ -1,10 +1,11 @@
 package javafeatures.io.test.serialization;
 
-import javafeatures.util.PrintUtil;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import java.io.*;
 import java.util.Random;
+
+import javafeatures.util.PrintUtil;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * 对象序列化
@@ -26,6 +27,10 @@ public class SerializableTest {
 			out.writeObject(so);
 		}
 
+		//这里在序列化之后、反序列化之前改变NUM的值，目的是验证static变量也是不可被序列化的；
+		//之所以反序列化后是有值的，是读取jvm中已存储的static变量值，而不是反序列化的值
+		SerializedObject.NUM = 0;
+
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("src/main/resources/io/output9.txt"))) {
 
 			//deserialize to object
@@ -38,7 +43,10 @@ public class SerializableTest {
 
 	static class SerializedObject implements Serializable {
 
-		public static final int NUM = 3;
+		/**
+		 * 声明为static的变量不可被序列化和反序列化
+		 */
+		public static int NUM = 3;
 
 		private String name;
 
