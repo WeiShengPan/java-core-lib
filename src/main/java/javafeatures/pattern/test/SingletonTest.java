@@ -10,12 +10,16 @@ public class SingletonTest {
 
 	public static void main(String[] args) {
 
+		//懒汉模式
 		LazySingleton lazySingleton = LazySingleton.getInstance();
 
+		//饿汉模式
 		HungrySingleton hungrySingleton = HungrySingleton.getInstance();
 
+		//静态内部类模式
 		StaticInnerClassSingleton staticInnerClassSingleton = StaticInnerClassSingleton.getInstance();
 
+		//枚举模式
 		EnumSingleton enumSingleton = EnumSingleton.INSTANCE;
 	}
 }
