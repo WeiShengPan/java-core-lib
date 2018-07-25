@@ -133,7 +133,7 @@ public class Utils {
 			return 0;
 		}
 
-		// in order to put empty or null in the last place, return empty string is greater
+		// in order to put empty or null in the last place of nature sorted list, define empty string is greater
 		if (StringUtils.isEmpty(str1)) {
 			return 1;
 		}
