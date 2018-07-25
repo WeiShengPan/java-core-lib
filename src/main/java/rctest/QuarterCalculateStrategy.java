@@ -12,8 +12,15 @@ import java.util.Map;
  */
 public interface QuarterCalculateStrategy {
 
+	/**
+	 * @param saleItems SaleItem list
+	 * @return return a map which map key is quarter, value is sale numbers.
+	 */
 	Map<Integer, Double> calculate(List<SaleItem> saleItems);
 
+	/**
+	 * Strategy for SUM
+	 */
 	QuarterCalculateStrategy SUM = saleItems -> {
 		// map key is quarter, value is total sale numbers
 		Map<Integer, Double> quarterMap = new HashMap<>(7);
@@ -30,8 +37,11 @@ public interface QuarterCalculateStrategy {
 		return quarterMap;
 	};
 
+	/**
+	 * Strategy for MAX
+	 */
 	QuarterCalculateStrategy MAX = saleItems -> {
-		// map key is quarter, value is total sale numbers
+		// map key is quarter, value is max sale numbers
 		Map<Integer, Double> quarterMap = new HashMap<>(7);
 
 		// group saleItems by quarter

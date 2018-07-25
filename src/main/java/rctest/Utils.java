@@ -118,7 +118,8 @@ public class Utils {
 			return true;
 		}
 
-		if (StringUtils.isNotEmpty(lastName1) && StringUtils.isNotEmpty(lastName2) && lastName1.compareTo(lastName2) == 0) {
+		if (StringUtils.isNotEmpty(lastName1) && StringUtils.isNotEmpty(lastName2)
+				&& lastName1.compareTo(lastName2) == 0) {
 			return true;
 		}
 
