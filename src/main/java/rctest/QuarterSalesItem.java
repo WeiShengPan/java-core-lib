@@ -6,6 +6,14 @@ public class QuarterSalesItem {
 
 	private double total;
 
+	public QuarterSalesItem() {
+	}
+
+	public QuarterSalesItem(int quarter, double total) {
+		this.quarter = quarter;
+		this.total = total;
+	}
+
 	public int getQuarter() {
 		return quarter;
 	}
