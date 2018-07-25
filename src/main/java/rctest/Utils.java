@@ -4,6 +4,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
+/**
+ * @author panws
+ * @since 2018-07-25
+ */
 public class Utils {
 
 	/**
@@ -71,7 +75,7 @@ public class Utils {
 	}
 
 	/**
-	 * We have all Keys: 0-9;
+	 * Question5, We have all Keys: 0-9;
 	 * usedKeys is an array to store all used keys like :[2,3,4];
 	 * We want to get all unused keys, in this example it would be: [0,1,5,6,7,8,9,]
 	 *
@@ -114,8 +118,7 @@ public class Utils {
 			return true;
 		}
 
-		if (StringUtils.isNotEmpty(lastName1) && StringUtils.isNotEmpty(lastName2)
-				&& lastName1.compareTo(lastName2) == 0) {
+		if (StringUtils.isNotEmpty(lastName1) && StringUtils.isNotEmpty(lastName2) && lastName1.compareTo(lastName2) == 0) {
 			return true;
 		}
 
