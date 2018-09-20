@@ -51,6 +51,7 @@ public class FullHttpClient {
                                 //消息聚合器，参数为消息合并的数据大小，保证数据由同一个channel处理，大小超过限制的数据会由多个channel处理，对业务开发不方便
                                 .addLast("Aggregator", new HttpObjectAggregator(512 * 1024))
 
+								//[inbound]
                                 .addLast("FullHttpClientHandler", new FullHttpClientHandler());
                     }
                 })

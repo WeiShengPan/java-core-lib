@@ -2,50 +2,69 @@ package javafeatures.thread.test;
 
 import javafeatures.util.PrintUtil;
 
-import java.util.concurrent.DelayQueue;
-import java.util.concurrent.Delayed;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
+ * java.util.concurrent.BlockingQueue 接口有以下阻塞队列的实现：
+ * FIFO 队列 ：LinkedBlockingQueue、ArrayBlockingQueue（固定长度）
+ * 优先级队列 ：PriorityBlockingQueue
+ * <p>
+ * 提供了阻塞的 take() 和 put() 方法：如果队列为空 take() 将阻塞，直到队列中有内容；如果队列为满 put() 将阻塞，直到队列有空闲位置。
+ * <p>
+ * 使用 BlockingQueue 实现生产者消费者问题
+ *
  * @author panws
  * @since 2017-09-12
  */
 public class BlockingQueueTest {
 
-	public static void main(String[] args) throws InterruptedException {
+	private static BlockingQueue<String> queue = new ArrayBlockingQueue<>(5);
 
-		DelayQueue<DelayedEle> delayQueue = new DelayQueue();
+	public static void main(String[] args) {
 
-		DelayedEle ele1 = new DelayedEle(1);
+		ExecutorService executorService = Executors.newCachedThreadPool();
 
-		delayQueue.add(ele1);
+		for (int i = 0; i < 2; i++) {
+			Producer producer = new Producer();
+			executorService.execute(producer);
+		}
 
-		PrintUtil.println(delayQueue.take().getValue());
+		for (int i = 0; i < 5; i++) {
+			Consumer consumer = new Consumer();
+			executorService.execute(consumer);
+		}
+
+		for (int i = 0; i < 3; i++) {
+			Producer producer = new Producer();
+			executorService.execute(producer);
+		}
 
 	}
 
-	static class DelayedEle implements Delayed {
-
-		private int value;
-
-		public DelayedEle(int value) {
-			this.value = value;
+	private static class Producer implements Runnable {
+		@Override
+		public void run() {
+			try {
+				queue.put("product");
+			} catch (InterruptedException e) {
+				PrintUtil.err(e.getMessage(), e);
+			}
+			PrintUtil.print("produce......");
 		}
+	}
 
-		@Override public long getDelay(TimeUnit unit) {
-			return 0;
-		}
-
-		@Override public int compareTo(Delayed o) {
-			return this.compareTo(o);
-		}
-
-		public int getValue() {
-			return value;
-		}
-
-		public void setValue(int value) {
-			this.value = value;
+	private static class Consumer implements Runnable {
+		@Override
+		public void run() {
+			try {
+				String product = queue.take();
+			} catch (InterruptedException e) {
+				PrintUtil.err(e.getMessage(), e);
+			}
+			PrintUtil.print("consume......");
 		}
 	}
 

@@ -36,7 +36,7 @@ public class ProductConsumeTest {
  */
 class Producer implements Runnable {
 
-	private Repository repository;
+	private final Repository repository;
 
 	private String name;
 
@@ -49,7 +49,7 @@ class Producer implements Runnable {
 		while (true) {
 			synchronized (repository) {
 				if (repository.getAccumulativeValue() >= 30) {
-					PrintUtil.println("生产数量已达上限，停止生产");
+					PrintUtil.println("生产数量已达上限，生产者" + name + "停止生产");
 					repository.notifyAll();
 					return;
 				}
@@ -77,7 +77,7 @@ class Producer implements Runnable {
  */
 class Consumer implements Runnable {
 
-	private Repository repository;
+	private final Repository repository;
 
 	private String name;
 
