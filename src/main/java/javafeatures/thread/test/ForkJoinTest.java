@@ -1,8 +1,8 @@
 package javafeatures.thread.test;
 
 import javafeatures.util.PrintUtil;
+import org.apache.commons.lang3.time.StopWatch;
 
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 import java.util.concurrent.RecursiveTask;
@@ -25,35 +25,48 @@ import java.util.concurrent.RecursiveTask;
  */
 public class ForkJoinTest {
 
-	public static void main(String[] args) throws ExecutionException, InterruptedException {
+	// 任务量小时，for loop耗时较短；但当任务量非常大时，ForkJoinPool性能高，且差距非常明显，差距可达数个数量级
+	private static final Long MAX = 100000000L;
+
+	public static void main(String[] args) {
+
+		StopWatch stopWatch = StopWatch.createStarted();
+		Long rst = 0L;
+		for (int i = 1; i <= MAX; i++) {
+			rst += i;
+		}
+		PrintUtil.println("1. time cost: %dms", stopWatch.getNanoTime() / 1000000);
+
+		stopWatch.reset();
+		stopWatch.start();
 		ForkJoinPool forkJoinPool = new ForkJoinPool();
-		Future<Integer> result = forkJoinPool.submit(new ForkJoinTask(1, 10000));
-		PrintUtil.println(result.get());
+		Future<Long> result = forkJoinPool.submit(new ForkJoinTask(1L, MAX));
+		PrintUtil.println("2. time cost: %dms", stopWatch.getNanoTime() / 1000000);
 	}
 
-	private static class ForkJoinTask extends RecursiveTask<Integer> {
+	private static class ForkJoinTask extends RecursiveTask<Long> {
 
 		//小于该阈值的任务才会直接进行计算，否则递归拆分成更小的任务
 		private final int threshold = 5;
-		private int first;
-		private int last;
+		private Long first;
+		private Long last;
 
-		ForkJoinTask(int first, int last) {
+		ForkJoinTask(Long first, Long last) {
 			this.first = first;
 			this.last = last;
 		}
 
 		@Override
-		protected Integer compute() {
-			int result = 0;
+		protected Long compute() {
+			Long result = 0L;
 			if (last - first <= threshold) {
 				//任务足够小，满足计算的阈值，则直接计算
-				for (int i = first; i <= last; i++) {
+				for (Long i = first; i <= last; i++) {
 					result += i;
 				}
 			} else {
 				//大于阈值，则递归拆分成更小的任务
-				int middle = first + (last - first) / 2;
+				Long middle = first + (last - first) / 2;
 
 				ForkJoinTask leftTask = new ForkJoinTask(first, middle);
 				ForkJoinTask rightTask = new ForkJoinTask(middle + 1, last);
