@@ -2,15 +2,37 @@ package javafeatures.thread.test;
 
 import javafeatures.util.PrintUtil;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadInfo;
+import java.lang.management.ThreadMXBean;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 /**
  * 死锁
  *
  * @author panws
  * @since 2017-07-26
  */
-public class DealLockTest {
+public class DeadLockTest {
 
 	public static void main(String[] args) {
+
+		ThreadMXBean mbean = ManagementFactory.getThreadMXBean();
+		Runnable dlcheck = () -> {
+			long[] threadIds = mbean.findDeadlockedThreads();
+			if (threadIds != null) {
+				ThreadInfo[] threadInfos = mbean.getThreadInfo(threadIds);
+				PrintUtil.println("Detected deadlock threads:");
+				for (ThreadInfo threadInfo : threadInfos) {
+					PrintUtil.println(threadInfo.getThreadName());
+				}
+			}
+		};
+
+		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+		scheduler.scheduleAtFixedRate(dlcheck, 5L, 10L, TimeUnit.SECONDS);
 
 		Object lockA = new Object();
 		Object lockB = new Object();
@@ -27,16 +49,17 @@ public class DealLockTest {
 
 class ThreadA extends Thread {
 
-	private Object lockA;
+	private final Object lockA;
 
-	private Object lockB;
+	private final Object lockB;
 
 	ThreadA(Object lockA, Object lockB) {
 		this.lockA = lockA;
 		this.lockB = lockB;
 	}
 
-	@Override public void run() {
+	@Override
+	public void run() {
 		synchronized (lockA) {
 			PrintUtil.println(this.getClass().getName() + " holds lockA.");
 			try {
@@ -55,16 +78,17 @@ class ThreadA extends Thread {
 
 class ThreadB extends Thread {
 
-	private Object lockA;
+	private final Object lockA;
 
-	private Object lockB;
+	private final Object lockB;
 
 	ThreadB(Object lockA, Object lockB) {
 		this.lockA = lockA;
 		this.lockB = lockB;
 	}
 
-	@Override public void run() {
+	@Override
+	public void run() {
 		synchronized (lockB) {
 			PrintUtil.println(this.getClass().getName() + " holds lockB.");
 			try {
