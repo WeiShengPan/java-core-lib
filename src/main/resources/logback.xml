@@ -1,0 +1,21 @@
+<?xml version="1.1" encoding='UTF-8' ?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <!-- log message patterns -->
+    <property name="defaultPattern" value="%date %-5level %-15(%logger{30}) - %msg%n"/>
+
+    <!-- ### Files Section ### -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${defaultPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.reflections" level="warn"/>
+    <logger name="org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor" level="debug"/>
+    <logger name="com.pws" level="debug"/>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
