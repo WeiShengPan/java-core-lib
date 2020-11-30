@@ -15,74 +15,78 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @Slf4j
 public class EventBusTest {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		EventBus eventBus = new EventBus("simpleTest");
-		CustomEventListener eventListener1 = new CustomEventListener("listener1");
-		CustomEventListener eventListener2 = new CustomEventListener("listener2");
+        EventBus eventBus = new EventBus("simpleTest");
+        CustomEventListener eventListener1 = new CustomEventListener("listener1");
+        CustomEventListener eventListener2 = new CustomEventListener("listener2");
 
-		eventBus.register(eventListener1);
-		eventBus.register(eventListener2);
+        eventBus.register(eventListener1);
+        eventBus.register(eventListener2);
 
-		eventBus.post(new MessageEvent(1));
-		eventBus.post(new MessageEvent(3));
-		eventBus.post(new Integer(1));
-		eventBus.post(new Integer(2));
-		eventBus.post("hahaha");
-		eventBus.post("hehehehe");
+        eventBus.post(new MessageEvent(1));
+        eventBus.post(new MessageEvent(3));
+        eventBus.post(new Integer(1));
+        eventBus.post(new Integer(2));
+        eventBus.post("hahaha");
+        eventBus.post("hehehehe");
 
-		eventBus.unregister(eventListener1);
+        eventBus.unregister(eventListener1);
 
-		eventBus.post(new MessageEvent(5));
-		eventBus.post(new MessageEvent(7));
-		eventBus.post("gagaga");
+        eventBus.post(new MessageEvent(5));
+        eventBus.post(new MessageEvent(7));
+        eventBus.post("gagaga");
 
-	}
+    }
 
-	/**
-	 * 使用Guava之后, 如果要订阅消息, 就不用再继承指定的接口, 只需要在指定的方法上加上 @Subscribe 注解即可
-	 */
-	static class CustomEventListener {
+    /**
+     * 使用Guava之后, 如果要订阅消息, 就不用再继承指定的接口, 只需要在指定的方法上加上 @Subscribe 注解即可
+     */
+    static class CustomEventListener {
 
-		private Integer intMessage;
+        private Integer intMessage;
 
-		private String stringMessage;
+        private String stringMessage;
 
-		private MessageEvent objMessage;
+        private MessageEvent objMessage;
 
-		private String name;
+        private String name;
 
-		public CustomEventListener(String name) {
-			this.name = name;
-		}
+        public CustomEventListener(String name) {
+            this.name = name;
+        }
 
-		@Subscribe public void listener(MessageEvent event) {
-			objMessage = event;
-			log.info("[%s] received obj: %s \n", name, objMessage);
-		}
+        @Subscribe
+        public void listener(MessageEvent event) {
+            objMessage = event;
+            log.info("[%s] received obj: %s \n", name, objMessage);
+        }
 
-		@Subscribe public void listenInt(Integer intMsg) {
-			intMessage = intMsg;
-			log.info("[%s] received int: %s \n", name, intMessage);
-		}
+        @Subscribe
+        public void listenInt(Integer intMsg) {
+            intMessage = intMsg;
+            log.info("[%s] received int: %s \n", name, intMessage);
+        }
 
-		@Subscribe public void listenString(String stringMsg) {
-			stringMessage = stringMsg;
-			log.info("[%s] received string: %s \n", name, stringMessage);
-		}
-	}
+        @Subscribe
+        public void listenString(String stringMsg) {
+            stringMessage = stringMsg;
+            log.info("[%s] received string: %s \n", name, stringMessage);
+        }
+    }
 
-	static class MessageEvent {
-		private int message;
+    static class MessageEvent {
+        private int message;
 
-		public MessageEvent(int message) {
-			this.message = message;
-		}
+        public MessageEvent(int message) {
+            this.message = message;
+        }
 
-		@Override public String toString() {
-			return new ToStringBuilder(this).append("message", message).toString();
-		}
-	}
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this).append("message", message).toString();
+        }
+    }
 
 }
 

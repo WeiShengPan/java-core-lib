@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
  * @since 2017-08-31
  */
 @Slf4j
+@Deprecated
 public class PrintUtil {
 
     private PrintUtil() {
@@ -16,7 +17,7 @@ public class PrintUtil {
     private static final String LINE_SEPARATOR = "********************";
 
     public static void println() {
-        System.out.println();
+        log.info("");
     }
 
     public static void println(Object obj) {
@@ -27,20 +28,16 @@ public class PrintUtil {
         log.info(String.format(format, arg));
     }
 
-    public static void printf(String format, Object... arg) {
-        System.out.printf(format, arg);
-    }
-
     public static void print(Object obj) {
-        System.out.print(obj);
+        log.info(obj.toString());
     }
 
     public static void err(Object obj) {
-        System.err.println(obj);
+        log.error(obj.toString());
     }
 
     public static void err(String format, Object... arg) {
-        System.err.println(String.format(format, arg));
+        log.error(String.format(format, arg));
     }
 
     public static void printSep() {
