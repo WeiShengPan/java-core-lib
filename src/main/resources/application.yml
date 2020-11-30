@@ -1,0 +1,18 @@
+management:
+  # Define management port and url path
+  server:
+    port: 8081
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /management
+  # Show health details
+  endpoint:
+    health:
+      show-details: always
+  # Disable PingHealthIndicator
+  health:
+    ping:
+      enabled: off
+
