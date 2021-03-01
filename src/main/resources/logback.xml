@@ -12,10 +12,12 @@
     </appender>
 
     <logger name="org.reflections" level="warn"/>
+    <logger name="org.springframework" level="warn"/>
+    <logger name="org.apache" level="warn"/>
     <logger name="org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor" level="debug"/>
     <logger name="com.pws" level="debug"/>
 
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
