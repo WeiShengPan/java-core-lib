@@ -1,6 +1,7 @@
 package com.pws.javafeatures.thread;
 
-import com.pws.javafeatures.util.PrintUtil;
+import com.oracle.tools.packager.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -13,6 +14,7 @@ import java.util.concurrent.TimeUnit;
  * @author panws
  * @since 2017-08-23
  */
+@Slf4j
 public class ThreadLocalTest {
 
 	public static void main(String[] args) throws InterruptedException {
@@ -41,7 +43,7 @@ class Accessor implements Runnable {
 	@Override public void run() {
 		while (!Thread.currentThread().isInterrupted()) {
 			ThreadLocalHolder.incr();
-			PrintUtil.println(this);
+			Log.info(this.toString());
 			Thread.yield();
 		}
 	}

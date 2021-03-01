@@ -1,4 +1,4 @@
-package com.pws.spring;
+package com.pws.spring.health;
 
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * /management/health
+ * path: /management/health
  *
  * @author wilson.pan
  * @date 2020/11/30
