@@ -1,6 +1,7 @@
 package com.pws.spring.controller;
 
 import com.pws.spring.aspect.AspectTestService;
+import com.pws.spring.async.AsyncTestService;
 import com.pws.spring.factorybean.FactoryBeanTestService;
 import com.pws.spring.getbean.PersonApplicationContextAware;
 import com.pws.spring.getbean.PersonApplicationListener;
@@ -33,6 +34,9 @@ public class MainController {
     @Autowired
     private AspectTestService aspectTestService;
 
+    @Autowired
+    private AsyncTestService asyncTestService;
+
     @RequestMapping(value = "test-factory-bean", method = RequestMethod.GET)
     public void testFactoryBean() {
         factoryBeanTestService.sayHello();
@@ -64,5 +68,12 @@ public class MainController {
     @RequestMapping(value = "test-aspect", method = RequestMethod.GET)
     public void testAspect() {
         aspectTestService.sayHello();
+    }
+
+    @RequestMapping(value = "test-async", method = RequestMethod.GET)
+    public void testAsync() {
+        asyncTestService.sayHello();
+        asyncTestService.sayHello();
+        asyncTestService.sayHello();
     }
 }
