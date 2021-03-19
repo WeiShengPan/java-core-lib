@@ -77,7 +77,8 @@ public class RestClient implements DisposableBean {
             throw new HttpRequestException(String.format("URL [%s] is not a valid value.", request.getRequestUri()));
         }
         try {
-            return httpClient.execute(httpRequest, new RestResponseHandler(request.isExtractHeaders()));
+//            return httpClient.execute(httpRequest, new RestResponseHandler(request.isExtractHeaders()));
+            return httpClient.execute(httpRequest, new RestResponseHandler(true));
         } catch (IOException e) {
             throw new HttpRequestException(e);
         }
