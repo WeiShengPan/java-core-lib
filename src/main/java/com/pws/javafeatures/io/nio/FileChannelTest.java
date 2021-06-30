@@ -22,11 +22,9 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 public class FileChannelTest {
 
-	private static final int B_SIZE = 1024;
-
 	private static final String FILE_PATH = "src/main/resources/io/output5.txt";
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 
 		//write from FileOutputStream
 		try (FileChannel fc = new FileOutputStream(FILE_PATH).getChannel()) {
@@ -44,34 +42,8 @@ public class FileChannelTest {
 		}
 
 		//read from FileInputStream
-		StringBuilder stringBuilder = new StringBuilder();
-		try (FileChannel fc = new FileInputStream(FILE_PATH).getChannel()) {
+		String val = FileUtils.read(FILE_PATH);
+		log.info("Read From FileInputStream: {}", val);
 
-			//只读访问必须分配ByteBuffer的大小，更高速度可用ByteBuffer.allocateDirect()产生直接缓冲器，但开支更大
-			ByteBuffer byteBuffer = ByteBuffer.allocate(B_SIZE);
-
-			//解决编码问题
-			CharsetDecoder decoder = StandardCharsets.UTF_8.newDecoder();
-			CharBuffer charBuffer = CharBuffer.allocate(B_SIZE);
-
-			while (fc.read(byteBuffer) != -1) {
-				//准备缓冲器，以便信息可被write读取
-				byteBuffer.flip();
-
-				// Decode in UTF-8
-				decoder.decode(byteBuffer, charBuffer, false);
-				charBuffer.flip();
-
-				// append to StringBuilder
-				stringBuilder.append(charBuffer.toString());
-
-				//对所有内部指针重新安排，以便缓冲器在另一个read操作期间能够做好接受数据的准备
-				byteBuffer.clear();
-                charBuffer.clear();
-			}
-
-            log.info("{}", stringBuilder.toString());
-
-		}
 	}
 }
