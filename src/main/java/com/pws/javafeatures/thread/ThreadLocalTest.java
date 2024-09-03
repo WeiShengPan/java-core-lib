@@ -1,6 +1,5 @@
 package com.pws.javafeatures.thread;
 
-import com.oracle.tools.packager.Log;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Random;
@@ -32,6 +31,7 @@ public class ThreadLocalTest {
 	}
 }
 
+@Slf4j
 class Accessor implements Runnable {
 
 	private int id;
@@ -43,7 +43,7 @@ class Accessor implements Runnable {
 	@Override public void run() {
 		while (!Thread.currentThread().isInterrupted()) {
 			ThreadLocalHolder.incr();
-			Log.info(this.toString());
+			log.info(this.toString());
 			Thread.yield();
 		}
 	}
