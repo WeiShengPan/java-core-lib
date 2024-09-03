@@ -166,6 +166,18 @@
             <version>3.0.2</version>
         </dependency>
 
+        <!-- es依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>co.elastic.clients</groupId>
+            <artifactId>elasticsearch-java</artifactId>
+            <version>7.17.18</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>panws</finalName>
