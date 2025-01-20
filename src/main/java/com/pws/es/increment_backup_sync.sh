@@ -357,6 +357,45 @@ wait_for_snapshot_completion() {
   check_continue
 }
 
+# 循环检查索引恢复进度
+wai_for_restore_completion() {
+  local es_host=$1
+  local credentials
+  credentials=$(get_es_credentials "$es_host")
+  local es_req_url="$es_host/$TEMP_INDEX/_recovery"
+
+  echo_color 3 "#### 开始监控索引 [$TEMP_INDEX] 的恢复进度..."
+  while true; do
+    # 查询恢复状态
+    echo_color 4 "API 请求 [GET]: $es_req_url"
+    local response
+    response=$(curl -s -u "$credentials" -X GET "$es_req_url")
+    echo "$response" | jq . 2>/dev/null || echo "$response"
+
+    # 检查 API 响应是否为有效 JSON
+    if ! echo "$response" | jq . > /dev/null 2>&1; then
+      echo_color 1 "Error: 恢复状态 API 响应无效：$response"
+      break
+    fi
+
+    # 检查恢复进度
+    local total_shards
+    local completed_shards
+    total_shards=$(echo "$response" | jq -r '.[].shards | length')
+    completed_shards=$(echo "$response" | jq -r '.[].shards | map(select(.stage == "DONE")) | length')
+
+    if [ "$completed_shards" -eq "$total_shards" ]; then
+      echo_color 2 "#### 恢复完成: $completed_shards/$total_shards shards."
+      break
+    else
+      echo_color 3 "#### 恢复中: $completed_shards/$total_shards shards 完成..."
+    fi
+
+    # 等待 5 秒后再次检查
+    sleep 5
+  done
+}
+
 # 恢复快照
 perform_restore() {
   local es_host=$1
@@ -399,7 +438,7 @@ proc_restore() {
   echo_color 3 "\n开始执行增量恢复流程..."
   list_snapshots "$ES_TARGET_HOST"
   perform_restore "$ES_TARGET_HOST"
-  wait_for_snapshot_completion "$ES_TARGET_HOST"
+  wai_for_restore_completion "$ES_TARGET_HOST"
   copy_temp_index_to_target_index "$ES_TARGET_HOST"
   wait_for_reindex_completion "$ES_TARGET_HOST" "$TARGET_REINDEX_TASK_ID"
   delete_temp_index "$ES_TARGET_HOST"
