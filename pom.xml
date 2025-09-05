@@ -178,6 +178,18 @@
             <version>7.17.18</version>
         </dependency>
 
+        <!-- state machine -->
+        <dependency>
+            <groupId>org.springframework.statemachine</groupId>
+            <artifactId>spring-statemachine-core</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cola</groupId>
+            <artifactId>cola-component-statemachine</artifactId>
+            <version>5.0.0</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>panws</finalName>
